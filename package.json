@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "updateapi": "ts-node ./src/updateAPI.ts run-file updateAPI.ts"
   },
   "private": true,
   "dependencies": {
@@ -18,8 +19,15 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
+    "@fortawesome/fontawesome-free": "^6.5.1",
+    "bootstrap": "^3.4.1",
+    "java-parser": "^2.3.0",
+    "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
+    "swiper": "^11.0.7",
     "tslib": "^2.3.0",
+    "video.js": "^8.10.0",
+    "yargs": "^17.7.2",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
@@ -33,6 +41,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.2.2"
   }
 }
