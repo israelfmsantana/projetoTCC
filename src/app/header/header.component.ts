@@ -1,13 +1,30 @@
-import { Component, AfterViewInit, Renderer2 } from '@angular/core';
+import { Component, AfterViewInit, Renderer2, ViewEncapsulation, OnInit} from '@angular/core';
+import { DarkModeService } from '../service/darkMode/dark-mode.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
+  savedMode = "";
+  ngOnInit(): void {
+    this.savedMode = localStorage.getItem('darkMode');
+    if(this.savedMode === "true"){
+      this.isToggled = true;
+    }
+    else {
+      this.isToggled = false;
+    }
+  }
+  isToggled = false;
 
-  constructor(private renderer: Renderer2) {}
+  toggleSlide() {
+    this.isToggled = !this.isToggled;
+  }
+
+  constructor(private renderer: Renderer2, private darkModeService: DarkModeService) {}
 
   ngAfterViewInit() {
     const header = this.renderer.selectRootElement('header', true);
@@ -32,13 +49,6 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   toggleTheme() {
-    const body = document.body;
-    if (body.classList.contains('dark')) {
-      this.renderer.removeClass(body, 'dark');
-      this.renderer.addClass(body, 'light');
-    } else {
-      this.renderer.removeClass(body, 'light');
-      this.renderer.addClass(body, 'dark');
-    }
+    this.darkModeService.setDarkMode(!this.darkModeService.isDarkMode);
   }
 }

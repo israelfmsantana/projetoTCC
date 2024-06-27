@@ -1,14 +1,21 @@
 main {
     transition: background-color 0.3s, color 0.3s;
   }
-  
-  body.light main {
-    background-color: white;
-    color: black;
-  }
-  
-  body.dark main {
-    background-color: black;
+
+
+
+  body.light .login-container a {
+    color: yellow;
+}
+body.light .login-container a:hover {
+    color: green;
+}
+body.dark .login-container a {
     color: white;
-  }
+}
+body.dark .login-container a:hover {
+    color: gray;
+}
+
+
   

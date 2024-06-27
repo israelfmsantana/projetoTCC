@@ -1,4 +1,53 @@
 <app-header></app-header>
-<main class="pt-20">
-    
-</main>
+<body class="font-sans antialiased" data-scroll-container>
+    <header class="relative flex items-center justify-center h-screen" data-scroll-section>
+        <div class="absolute inset-0 flex items-center justify-center">
+            <video id="background-video" autoplay loop muted class="w-5/6 h-5/6 object-cover opacity-70 rounded-lg" style="filter: brightness(0.7); pointer-events: none;">
+                <source src="../../assets/video/110694-688200174_small.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="relative z-10 text-center">
+            <h1 class="text-5xl font-bold text-custom-blueMenu">Olá galera! Eu sou Israel Santana</h1>
+        </div>
+    </header>
+    <main class="flex items-center justify-center h-screen" data-scroll-section>
+        <div class="w-5/6 h-5/6 bg-white bg-opacity-70 rounded-lg p-8 shadow-lg flex items-center justify-center">
+            <div>
+                <h2 class="text-4xl font-bold mb-4 text-custom-blueMenu">Sobre</h2>
+                <p class="text-gray-700 text-lg mb-4">
+                    Bem-vindo ao meu site! Sou um desenvolvedor apaixonado por criar soluções inovadoras e eficientes. 
+                    Com uma sólida formação em ciência da computação e anos de experiência no setor, dedico-me a transformar ideias complexas em realidades digitais funcionais e estéticas.
+                </p>
+                <p class="text-gray-700 text-lg mb-4">
+                    Aqui você encontrará informações detalhadas sobre meus projetos, nos quais aplico metodologias ágeis e tecnologias de ponta para entregar produtos de alta qualidade. Cada projeto reflete meu compromisso com a excelência e minha habilidade de resolver problemas complexos de maneira criativa.
+                </p>
+                <p class="text-gray-700 text-lg mb-4">
+                    Minhas habilidades abrangem uma ampla gama de áreas, incluindo desenvolvimento web e móvel, design de interfaces, e integração de sistemas. Estou sempre em busca de novos desafios e oportunidades para aprender e crescer profissionalmente.
+                </p>
+                <p class="text-gray-700 text-lg mb-4">
+                    Além de meu trabalho técnico, valorizo a colaboração e a comunicação eficazes. Acredito que as melhores soluções surgem de equipes diversificadas e bem integradas, onde cada membro contribui com suas perspectivas únicas.
+                </p>
+                <p class="text-gray-700 text-lg mb-4">
+                    Explore meu site para saber mais sobre meu trabalho, minhas competências e como posso ajudar a transformar suas ideias em projetos bem-sucedidos. Fique à vontade para entrar em contato comigo para discutir possíveis colaborações ou para saber mais sobre meus serviços.
+                </p>
+                <p class="text-gray-700 text-lg mb-4">
+                    Obrigado pela visita e espero que você encontre aqui tudo o que procura. Vamos juntos construir algo incrível!
+                </p>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var video = document.getElementById('background-video');
+            video.playbackRate = 0.5; // Reduz a velocidade do vídeo para 50%
+
+            // Initialize Locomotive Scroll
+            const scroll = new LocomotiveScroll({
+                el: document.querySelector('[data-scroll-container]'),
+                smooth: true,
+                lerp: 0.1, // Adjust this value for more or less fluidity
+            });
+        });
+    </script>
+</body>

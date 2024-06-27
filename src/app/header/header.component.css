@@ -3,3 +3,18 @@
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+
+
+body.light .header-container a {
+  color: black;
+}
+body.light .header-container a:hover {
+  color: gray;
+}
+body.dark .header-container a {
+  color: white;
+}
+body.dark .header-container a:hover {
+  color: gray;
+}

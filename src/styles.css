@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+}
+
+.will-change-transform {
+    will-change: transform;
+}
+
+/* Locomotive Scroll styles */
+[data-scroll-container] {
+    overflow: hidden;
+}
+
+
+
+
 
 body {
     transition: background-color 0.3s, color 0.3s;
@@ -13,7 +29,7 @@ body {
   }
   
   body.dark {
-    background-color: rgb(0, 3, 39);
+    background-color: black;
     color: white;
   }
   
@@ -28,20 +44,16 @@ body {
   }
   
   body.dark header {
-    background-color: rgb(0, 3, 39);
+    background-color: black;
     color: white;
   }
   
   header.scrolled {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+  
 
 
-  body.light a {
-    color: black;
-  }
-  body.dark a {
-    color: white;
-  }
-  
-  
+
+
+
