@@ -5,8 +5,8 @@
       </div>
       <nav class="hidden md:flex space-x-4">
         <ul class="flex space-x-4">
-          <li><a href="#" class="text-gray-600 hover:text-gray-800">Sobre</a></li>
-          <li><a href="#" class="text-gray-600 hover:text-gray-800">Projetos</a></li>
+          <li><a href="#" class="font-semibold hover:text-gray-600">Sobre</a></li>
+          <li><a href="#" class="font-semibold hover:text-gray-600">Projetos</a></li>
         </ul>
       </nav>
       <div class="md:hidden">
@@ -16,6 +16,9 @@
           </svg>
         </button>
       </div>
+      <button (click)="toggleTheme()" class="ml-4 p-2 rounded bg-gray-800 text-white">
+        Toggle Theme
+      </button>
     </div>
     <nav id="mobile-menu" class="md:hidden hidden bg-white">
       <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -24,3 +27,4 @@
       </ul>
     </nav>
   </header>
+  

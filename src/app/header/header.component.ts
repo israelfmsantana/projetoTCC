@@ -30,4 +30,15 @@ export class HeaderComponent implements AfterViewInit {
       }
     });
   }
+
+  toggleTheme() {
+    const body = document.body;
+    if (body.classList.contains('dark')) {
+      this.renderer.removeClass(body, 'dark');
+      this.renderer.addClass(body, 'light');
+    } else {
+      this.renderer.removeClass(body, 'light');
+      this.renderer.addClass(body, 'dark');
+    }
+  }
 }

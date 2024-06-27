@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body {
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  body.light {
+    background-color: white;
+    color: black;
+  }
+  
+  body.dark {
+    background-color: rgb(0, 3, 39);
+    color: white;
+  }
+  
+
+  header {
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  body.light header {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+  }
+  
+  body.dark header {
+    background-color: rgb(0, 3, 39);
+    color: white;
+  }
+  
+  header.scrolled {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+
+  body.light a {
+    color: black;
+  }
+  body.dark a {
+    color: white;
+  }
+  
+  
