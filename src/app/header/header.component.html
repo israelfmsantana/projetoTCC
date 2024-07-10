@@ -1,4 +1,4 @@
-<header class="fixed w-full top-0 z-10 bg-transparent transition duration-300 ease-in-out pointer-events-none header-container">
+<!-- <header class="fixed w-full top-0 z-10 bg-transparent transition duration-300 ease-in-out pointer-events-none header-container">
     <div class="container mx-auto px-4 py-6 flex justify-between items-center pointer-events-auto">
         <div class="flex items-center space-x-4">
             <span class="text-lg font-semibold ml-2">Israel Santana</span>
@@ -24,7 +24,7 @@
             </div>
         </nav>
 
-        <!-- Menu de navegação (mobile) -->
+
         <div class="md:hidden">
             <button id="menu-button" class="text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -34,11 +34,68 @@
         </div>
     </div>
 
-    <!-- Menu de navegação móvel -->
+
     <nav id="mobile-menu" class="md:hidden hidden bg-transparent">
         <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <li><a href="#" class="text-gray-600 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium">Sobre</a></li>
             <li><a href="#" class="text-gray-600 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium">Projetos</a></li>
         </ul>
     </nav>
-</header>
+</header> -->
+
+
+
+
+
+
+
+
+
+<nav class="side-menu" [ngClass]="{'collapsed': isCollapsed}" (mouseenter)="expandMenu()" (mouseleave)="collapseMenu()">
+    <ul class="nav flex-column" [ngClass]="{'menu-expanded': !isCollapsed}">
+        <li class="nav-item" [class.gold-link]="verifica('/home')">
+            <button class="nav-link" (click)="navigateTo('/home')">
+                <i class="fa-solid fa-house"></i>
+                <p *ngIf="!isCollapsed">Início</p>
+            </button>
+        </li>
+        <li class="nav-item" [class.gold-link]="verifica('/about')">
+            <button class="nav-link" (click)="navigateTo('/about')">
+                <i class="fa-solid fa-user"></i>
+                <p *ngIf="!isCollapsed">Sobre</p>
+            </button>
+        </li>
+        <li class="nav-item" [class.gold-link]="verifica('/project')">
+            <button class="nav-link" (click)="navigateTo('/project')">
+                <i class="fa-solid fa-folder"></i>
+                <p *ngIf="!isCollapsed">Projetos</p>
+            </button>
+        </li>
+        <div class="w-3/4 mx-auto h-px bg-gray-500 my-2"></div>
+
+        <li *ngIf="isCollapsed && !isToggled" class="nav-item mb-4">
+            <span class="nav-link">
+                <i class="fas fa-sun w-4 h-4"></i>
+            </span>
+        </li>
+        <li *ngIf="isCollapsed && isToggled" class="nav-item mb-4">
+            <span class="nav-link">
+                <i class="fas fa-moon w-4 h-4"></i>
+            </span>
+        </li>
+        <li *ngIf="!isCollapsed" [ngClass]="{'bg-gray-300': !isToggled, 'bg-gray-200': isToggled}" class="relative w-16 h-8 rounded-full overflow-hidden ml-8 mt-4">
+            <div (click)="toggleTheme()"
+                [style.transform]="'translateX(' + (isToggled ? '100%' : '0') + ')'"
+                class="absolute top-1 left-1 w-7 h-6 rounded-full shadow-md cursor-pointer transition-transform duration-300 ease-in-out flex items-center justify-center bg-white"
+                (click)="toggleSlide()">
+                <span *ngIf="!isToggled" class="text-gray-700">
+                    <i class="fas fa-sun w-4 h-4"></i>
+                </span>
+                <span *ngIf="isToggled" class="text-gray-700">
+                    <i class="fas fa-moon w-4 h-4"></i>
+                </span>
+            </div>
+        </li>
+    </ul>
+</nav>
+

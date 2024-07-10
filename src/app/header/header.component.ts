@@ -10,6 +10,13 @@ import { DarkModeService } from '../service/darkMode/dark-mode.service';
 export class HeaderComponent implements OnInit, AfterViewInit {
   savedMode = "";
   ngOnInit(): void {
+
+    this.collapseMenu();
+    this.lasrouter = window.localStorage.getItem(this.keyRoute);
+    this.verifica(this.lasrouter);
+
+
+
     this.savedMode = localStorage.getItem('darkMode');
     if(this.savedMode === "true"){
       this.isToggled = true;
@@ -50,5 +57,64 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   toggleTheme() {
     this.darkModeService.setDarkMode(!this.darkModeService.isDarkMode);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // ngOnInit(): void {
+  //   this.collapseMenu();
+  //   this.lasrouter = window.localStorage.getItem(this.keyRoute);
+  //   this.verifica(this.lasrouter)
+
+    
+  // }
+
+  keyRoute: string = 'lastRoute';
+  isCollapsed: boolean = false;
+  lasrouter: string;
+
+  verifica(route: string): Boolean {
+    if (this.lasrouter === route) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  expandMenu() {
+    if (this.isCollapsed) {
+      this.isCollapsed = false;
+    }
+    setTimeout(() => {
+      document.querySelector('.nav')?.classList.add('menu-expanded');
+    }, 600); // Tempo igual ao tempo de transição em milissegundos
+  }
+
+  collapseMenu() {
+    if (!this.isCollapsed) {
+      this.isCollapsed = true;
+    }
+    document.querySelector('.nav')?.classList.remove('menu-expanded');
+  }
+
+  toggleMenu() {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+
+  navigateTo(route: string) {
+    // this.router.navigate([route]);
   }
 }
