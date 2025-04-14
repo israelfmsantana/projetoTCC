@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, Renderer2, ViewEncapsulation, OnInit} from '@angular/core';
+import { Component, AfterViewInit, Renderer2, ViewEncapsulation, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener} from '@angular/core';
 import { DarkModeService } from '../service/darkMode/dark-mode.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,9 +12,13 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   savedMode = "";
   ngOnInit(): void {
 
+    this.verificarLocalStorage();
+    this.intervalo = setInterval(() => {
+      this.verificarLocalStorage();
+    }, 300); // Verifica a cada 500ms
+
+
     this.collapseMenu();
-    this.lasrouter = window.localStorage.getItem(this.keyRoute);
-    this.verifica(this.lasrouter);
 
 
 
@@ -29,9 +34,24 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   toggleSlide() {
     this.isToggled = !this.isToggled;
+    this.isToggledHead.emit();
   }
 
-  constructor(private renderer: Renderer2, private darkModeService: DarkModeService) {}
+  constructor(private renderer: Renderer2, private darkModeService: DarkModeService, private router: Router) {
+    this.verificarLocalStorage();
+  }
+
+  private intervalo!: any;
+  ngOnDestroy() {
+    clearInterval(this.intervalo); // Evita vazamento de memória
+  }
+
+  verificarLocalStorage() {
+    const scroll = localStorage.getItem(this.keyLocalScroll);
+    this.lastLocalScroll = scroll // Ativa se o valor for "ativar"
+  }
+
+
 
   ngAfterViewInit() {
     const header = this.renderer.selectRootElement('header', true);
@@ -59,30 +79,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.darkModeService.setDarkMode(!this.darkModeService.isDarkMode);
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // ngOnInit(): void {
-  //   this.collapseMenu();
-  //   this.lasrouter = window.localStorage.getItem(this.keyRoute);
-  //   this.verifica(this.lasrouter)
-
-    
-  // }
-
   keyRoute: string = 'lastRoute';
+  keyLocalScroll: string = 'localScroll';
   isCollapsed: boolean = false;
   lasrouter: string;
+  lastLocalScroll: string;
 
   verifica(route: string): Boolean {
     if (this.lasrouter === route) {
@@ -115,6 +116,42 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
 
   navigateTo(route: string) {
-    // this.router.navigate([route]);
+    this.router.navigate([route]);
   }
+
+
+
+
+
+
+
+
+
+
+  @Output() scrollAbout = new EventEmitter<void>();
+  @Output() scrollHome = new EventEmitter<void>();
+  @Output() scrollProject = new EventEmitter<void>();
+  @Output() isToggledHead = new EventEmitter<void>();
+  @Output() scrollContact = new EventEmitter<void>();
+
+  goAbout() {
+    this.scrollAbout.emit();
+  }
+
+  goHome() {
+    this.scrollHome.emit();
+  }
+  goProject() {
+    this.scrollProject.emit();
+  }
+  goContact() {
+    this.scrollContact.emit();
+  }
+
+
+
+
+  @ViewChild('meuElemento') meuElemento!: ElementRef;
+  estaVisivel = false;
 }
+

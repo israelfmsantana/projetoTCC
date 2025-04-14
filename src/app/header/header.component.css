@@ -34,7 +34,22 @@ body.dark .header-container a:hover {
 
 
 
+body.light .header nav {
+  background-color: rgb(36, 48, 63);
+}
+body.dark .header nav {
+  background-color: white;
+}
+body.Light .header .nav-link {
+  color: white;
+}
+body.dark .header .nav-link {
+  color: rgb(36, 48, 63);
+}
 
+body .header .nav-link:hover {
+  color: rgb(60, 80, 224);
+}
 
 
 
@@ -44,12 +59,12 @@ body.dark .header-container a:hover {
   top: 50%;
   transform: translateY(-50%);
   width: 130px;
-  height: 300px;
-  background-color: rgb(36, 48, 63);
+  height: 360px;
   padding-top: 10px;
   color: #fff;
   text-align: center;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  background-color: rgb(36, 48, 63);
+  box-shadow: 7px 0 10px rgba(0, 0, 0, 0.2);
   border-bottom-right-radius: 30px;
   border-top-right-radius: 30px;
   overflow: hidden;
@@ -59,7 +74,7 @@ body.dark .header-container a:hover {
 
 .side-menu.collapsed {
   width: 60px;
-  height: 190px;
+  height: 230px;
 }
 
 .side-menu.collapsed i {
@@ -81,7 +96,7 @@ body.dark .header-container a:hover {
   pointer-events: auto; /* Habilita o evento de mouse nos links quando o menu está expandido */
 }
 
-.nav-link:hover {
+body.dark .header .nav-item:hover {
   color: rgb(60, 80, 224);
 }
 
@@ -97,6 +112,7 @@ img {
   width: 28px;
   height: 28px;
 }
+
 
 .side-menu.collapsed .nav-link {
   height: 14px;
@@ -122,7 +138,11 @@ a:hover {
   margin-top: 20px;
   transform: translateY(-50%);
   left: 25px;
-  transition: left 1s ease;
+  transition: left 2s ease;
+}
+
+.menu-expanded .gold-link button::before {
+  left: 25px;
 }
 
 .side-menu.collapsed .gold-link button::before {
@@ -130,6 +150,7 @@ a:hover {
   top: 25px;
   background-color: transparent;
 }
+
 
 
 

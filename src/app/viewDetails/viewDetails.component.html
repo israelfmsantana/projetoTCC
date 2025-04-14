@@ -1,0 +1,142 @@
+<div class="mb-40 ml-20 mr-20">
+
+
+
+    <div class="relative p-8 transition-all shadow-2xl mt-14 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-2xl">
+        <h2 class="mb-6 text-4xl font-extrabold text-white">Escola</h2>
+
+        <!-- Botão no canto superior direito -->
+        <button class="absolute px-6 py-4 text-xl text-center text-white transition-all rounded-lg w-18 top-10 right-10 h-14 bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110">
+            <i class="text-2xl text-white fa-solid fa-gear"></i>
+        </button>
+      
+        <!-- Ícone + Nome da Escola -->
+        <div class="flex items-center mt-10">
+          <div class="flex items-center justify-center bg-white rounded-full shadow-lg min-w-20 min-h-20">
+            <i class="text-3xl text-teal-500 fa-solid fa-building-columns"></i>
+          </div>
+          <div class="ml-10">
+            <h2 class="text-5xl font-extrabold text-white">EEEFM Alfredo Chaves</h2>
+            <p class="mt-2 text-2xl text-white/80">3º Lugar • 12.345 pontos</p>
+          </div>
+        </div>
+      
+        <!-- Endereço e Telefone -->
+        <div class="flex pb-10 mt-10 border-b border-white/30">
+          <div class="w-1/2 pr-6">
+            <h3 class="text-3xl font-bold text-white">Endereço</h3>
+            <p class="text-xl text-gray-200">Rua Só quero terminar o TCC</p>
+          </div>
+          <div class="w-1/2 pl-6 border-l border-white/50">
+            <h3 class="text-3xl font-bold text-white">Telefone</h3>
+            <p class="text-xl text-gray-200">(27) 66666-6666</p>
+          </div>
+        </div>
+      
+        <!-- Pontuação por turma -->
+        <div class="mt-10">
+          <h3 class="mb-6 text-3xl font-bold text-white">Pontuação por turma</h3>
+          <div class="grid grid-cols-2 gap-6">
+            <div *ngFor="let turma of pontuacaoTurmas" class="p-4 shadow-md bg-white/10 rounded-xl">
+              <p class="text-xl font-semibold text-white">{{ turma.nome }}</p>
+              <p class="text-2xl font-bold text-white">{{ turma.pontos.toLocaleString() }} pts</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    
+
+    <!-- Grupo: Coordenação -->
+    <div class="relative p-8 transition-all shadow-2xl mt-14 bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 rounded-2xl">
+        <h2 class="mb-6 text-4xl font-extrabold text-white">Coordenação</h2>
+    
+        <!-- Botão no canto superior direito -->
+        <button class="absolute px-6 py-4 text-xl text-center text-white transition-all rounded-lg w-18 top-5 right-10 h-14 bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110">
+            <i class="text-2xl text-white fa-solid fa-gear"></i>
+        </button>
+    
+        <!-- Grid para os 4 Cards -->
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <!-- Card 1 -->
+            <div class="flex items-center p-8 space-x-6 text-white transition-all shadow-xl bg-gradient-to-r from-teal-600 via-teal-700 to-teal-800 rounded-xl">
+                <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
+                    <i class="text-3xl text-teal-500 fas fa-users-cog"></i>
+                </div>
+                <div class="flex flex-col space-y-3">
+                    <p class="text-3xl font-semibold text-white">Israel Fernando Mendes Santana</p>
+                    <p class="text-xl text-gray-200">Diretor</p>
+                </div>
+            </div>
+    
+            <!-- Card 2 -->
+            <div class="flex items-center p-8 space-x-6 text-white transition-all shadow-xl bg-gradient-to-r from-teal-600 via-teal-700 to-teal-800 rounded-xl">
+                <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
+                    <i class="text-3xl text-teal-500 fas fa-user-tie"></i>
+                </div>
+                <div class="flex flex-col space-y-3">
+                    <p class="text-3xl font-semibold text-white">Lucas Magnago</p>
+                    <p class="text-xl text-gray-200">Coordenador</p>
+                </div>
+            </div>
+    
+            <!-- Card 3 -->
+            <div class="flex items-center p-8 space-x-6 text-white transition-all shadow-xl bg-gradient-to-r from-teal-600 via-teal-700 to-teal-800 rounded-xl">
+                <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
+                    <i class="text-3xl text-teal-500 fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="flex flex-col space-y-3">
+                    <p class="text-3xl font-semibold text-white">Carlos Eduardo Rocha</p>
+                    <p class="text-xl text-gray-200">Coordenador</p>
+                </div>
+            </div>
+    
+            <!-- Card 4 -->
+            <div class="flex items-center p-8 space-x-6 text-white transition-all shadow-xl bg-gradient-to-r from-teal-600 via-teal-700 to-teal-800 rounded-xl">
+                <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
+                    <i class="text-3xl text-teal-500 fas fa-user-graduate"></i>
+                </div>
+                <div class="flex flex-col space-y-3">
+                    <p class="text-3xl font-semibold text-white">Ana Beatriz Nogueira</p>
+                    <p class="text-xl text-gray-200">Pedagoga</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Grupo: Professores -->
+    <div class="relative p-8 transition-all shadow-2xl mt-14 bg-gradient-to-r from-purple-800 via-indigo-900 to-purple-950 rounded-2xl">
+        <h2 class="mb-6 text-4xl font-extrabold text-white">Professores</h2>
+    
+        <!-- Botão no canto superior direito -->
+        <button class="absolute px-6 py-4 text-xl text-center text-white transition-all rounded-lg w-18 top-5 right-10 h-14 bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110">
+            <i class="text-2xl text-white fa-solid fa-gear"></i>
+        </button>
+        
+        <!-- Barra de pesquisa -->
+        <div class="flex justify-center mb-12">
+            <input [(ngModel)]="filtroProf" type="text" placeholder="Pesquise por nome ou escola" 
+                class="w-full max-w-lg p-4 text-xl text-gray-900 transition-all transform bg-gray-100 rounded-lg shadow-lg focus:outline-none dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 hover:scale-105 focus:ring-4 focus:ring-teal-400">
+        </div>
+        
+        <!-- Grid para os 4 Cards com scroll -->
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 max-h-[calc(4*min(12rem,4vw))] overflow-y-auto">
+            <!-- Card 1 -->
+            <div *ngFor="let professor of professoresFiltrados" class="flex items-center p-8 space-x-6 text-white transition-all shadow-xl bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-700 rounded-xl">
+                <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
+                    <i class="text-3xl text-purple-600 fas fa-user-tie"></i>
+                </div>
+                <div class="flex flex-col space-y-3">
+                    <p class="text-3xl font-semibold text-white">{{ professor.nome }}</p>
+                    <p class="text-xl text-gray-200">{{professor.materia}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+</div>

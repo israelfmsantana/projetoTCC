@@ -1,0 +1,140 @@
+<div class="flex-1 h-screen p-6">
+    <h2 class="mb-10 text-5xl font-extrabold text-center text-white">Batalhas</h2>
+    <div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-2">
+      
+        <!-- Card Procurar Batalhas -->
+        <div class="p-6 text-center rounded-lg shadow-lg bg-gradient-to-br from-teal-200 to-teal-400">
+            <h2 class="mb-2 text-xl font-semibold text-gray-800">Procurar Batalha</h2>
+            <p class="mb-4 text-gray-600">Encontre um oponente aleatório para desafiar agora!</p>
+            <button class="px-8 py-4 font-medium text-white transition-all rounded-full bg-gradient-to-r from-green-400 to-blue-500 hover:scale-105">
+                Procurar Oponente
+            </button>
+        </div>
+    
+        <!-- Cabeçalho Desafiar Amigos -->
+        <div class="flex flex-col justify-between h-full p-6 bg-green-600 rounded-lg shadow-lg">
+            <div class="flex items-center justify-between mb-4">
+                <h1 class="text-2xl font-bold text-white">Desafiar Amigos</h1>
+                <button class="px-5 py-3 text-white transition-colors bg-indigo-700 rounded-full hover:bg-indigo-800">
+                    Convidar Amigos
+                </button>
+            </div>
+        
+            <!-- Lista de Amigos Disponíveis com Scroll -->
+            <div class="flex flex-col gap-4 pr-2 overflow-y-auto " style="max-height: 400px;">
+                <!-- Card de Amigo -->
+                <div class="p-4 transition-all duration-200 rounded-lg shadow-md bg-gradient-to-br from-green-700 to-teal-600 hover:shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <!-- Informações do Amigo -->
+                        <div class="flex items-center">
+                            <img src="caminho/para/avatar.jpg" alt="Avatar do Amigo" class="w-12 h-12 mr-4 rounded-full">
+                            <div class="w-40">
+                                <p class="text-lg font-semibold text-white">Anker Douglas Loss</p>
+                                <p class="text-sm text-white">Nível 5</p>
+                            </div>
+                        </div>
+                
+                        <!-- Ícone de Espadas e Botão Desafiar -->
+                        <!-- <button class="flex items-center justify-center w-10 h-10 text-white transition-colors rounded-full bg-amber-500 hover:bg-amber-600">
+                            <img src="../../assets/icon/tcc/sword-svgrepo-com.svg" alt="Espadas Cruzadas" class="w-8 h-8">
+                        </button> -->
+                        <button class="px-6 py-4 text-xl text-center transition-all rounded-lg w-36 bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110" >
+                            Desafiar
+                        </button>
+                    </div>
+                </div>
+                <!-- Repita o card acima para os outros amigos -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Histórico de Batalhas Recentes -->
+    <div class="mt-8">
+        <h2 class="mb-4 text-xl font-bold text-white">Batalhas Recentes</h2>
+        <div class="space-y-4">
+            <!-- Batalha 1 -->
+            <div class="p-4 rounded-lg shadow-md bg-gradient-to-br from-purple-200 to-indigo-300">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <img src="caminho/para/avatar.jpg" alt="Avatar do Oponente" class="w-12 h-12 mr-4 rounded-full">
+                        <div>
+                            <p class="text-lg font-semibold text-indigo-700">Israel Fernando Mendes Santana</p>
+                            <p class="text-sm text-gray-600">Resultado: Vitória</p>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-600">Há 2 dias</span>
+                </div>
+
+                <!-- XP e Moedas -->
+                <div class="flex items-center justify-between mt-4 text-sm text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <i class="text-green-500 fas fa-arrow-up"></i>
+                        <span>+50 XP</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="text-yellow-500 fas fa-coins"></i>
+                        <span>+30 Moedas</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batalha 2 -->
+            <div class="p-4 rounded-lg shadow-md bg-gradient-to-br from-purple-200 to-indigo-300">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <img src="caminho/para/avatar.jpg" alt="Avatar do Oponente" class="w-12 h-12 mr-4 rounded-full">
+                        <div>
+                            <p class="text-lg font-semibold text-indigo-700">Maria Souza</p>
+                            <p class="text-sm text-gray-600">Resultado: Derrota</p>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-600">Há 5 dias</span>
+                </div>
+
+                <!-- XP e Moedas -->
+                <div class="flex items-center justify-between mt-4 text-sm text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <i class="text-red-500 fas fa-arrow-down"></i>
+                        <span>-30 XP</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="text-yellow-500 fas fa-coins"></i>
+                        <span>-20 Moedas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll para as Batalhas Mais Antigas -->
+        <div class="mt-6 overflow-y-auto" style="max-height: 300px;">
+            <div class="space-y-4">
+                <!-- Exemplo de Batalha 3 e outros -->
+                <div class="p-4 rounded-lg shadow-md bg-gradient-to-br from-purple-200 to-indigo-300">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="caminho/para/avatar.jpg" alt="Avatar do Oponente" class="w-12 h-12 mr-4 rounded-full">
+                            <div>
+                                <p class="text-lg font-semibold text-indigo-700">Lucas Oliveira</p>
+                                <p class="text-sm text-gray-600">Resultado: Vitória</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-600">Há 8 dias</span>
+                    </div>
+
+                    <!-- XP e Moedas -->
+                    <div class="flex items-center justify-between mt-4 text-sm text-gray-600">
+                        <div class="flex items-center gap-2">
+                            <i class="text-green-500 fas fa-arrow-up"></i>
+                            <span>+70 XP</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="text-yellow-500 fas fa-coins"></i>
+                            <span>+50 Moedas</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicione outros cards de batalhas mais antigas conforme necessário -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,6 +13,12 @@ export class DarkModeService {
     this.applyMode();
   }
 
+  ngOnInit() {
+    const savedMode = localStorage.getItem('darkMode');
+    this._isDarkMode = savedMode === 'true';
+    this.applyMode();
+  }
+
   get isDarkMode(): boolean {
     return this._isDarkMode;
   }
@@ -25,6 +31,8 @@ export class DarkModeService {
 
   private applyMode() {
     const body = document.body;
+    const sideMenu = document.querySelectorAll('side-menu');
+    
     if (this._isDarkMode) {
       body.classList.remove('light');
       body.classList.add('dark');
@@ -32,5 +40,19 @@ export class DarkModeService {
       body.classList.remove('dark');
       body.classList.add('light');
     }
+
+
+
+    // if (this._isDarkMode) {
+    //   elements.forEach((el) => {
+    //     el.classList.remove('light');
+    //     el.classList.add('dark');
+    //   })
+    // } else {
+    //   elements.forEach((el) => {
+    //     el.classList.remove('dark');
+    //     el.classList.add('light');
+    //   })
+    // }
   }
 }

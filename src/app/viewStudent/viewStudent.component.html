@@ -1,0 +1,31 @@
+<h2 class="mb-10 text-5xl font-extrabold text-center text-white">Alunos</h2>
+            
+                <!-- Barra de pesquisa -->
+                <div class="flex justify-center mb-12">
+                    <input [(ngModel)]="filtroAluno" type="text" placeholder="Pesquise por nome ou escola" 
+                    class="w-full max-w-lg p-4 text-xl text-gray-900 transition-all transform bg-gray-100 rounded-lg shadow-lg ml-96 focus:outline-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 hover:scale-105 focus:ring-4 focus:ring-teal-400">
+                    <button class="px-6 py-4 ml-56 text-xl text-center text-white transition-all rounded-lg w-36 bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110" 
+                        (click)="abrirModalCreateStudent()">Adicionar
+                    </button>
+                </div>
+
+                <app-createStudent *ngIf="modalAberto" (fechar)="fecharModalCreateStudent()"></app-createStudent>
+            
+                <!-- Cards -->
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+                    <div *ngFor="let aluno of alunosFiltrados" class="flex items-center p-8 space-x-6 text-white transition-all shadow-2xl bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-700 rounded-xl hover:scale-105 hover:shadow-xl">
+                        <!-- Ícone de perfil -->
+                        <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
+                            <i class="text-3xl text-blue-600 fas fa-user-graduate"></i> <!-- Ícone de estudante -->
+                        </div>
+            
+                        <!-- Informações do membro -->
+                        <div class="flex flex-col space-y-3">
+                            <!-- Nome do aluno -->
+                            <p class="text-3xl font-semibold text-white">{{ aluno.nome }}</p>
+            
+                            <!-- Escola do aluno -->
+                            <p class="text-xl text-gray-200">{{ aluno.escola }}</p>
+                        </div>
+                    </div>
+                </div>

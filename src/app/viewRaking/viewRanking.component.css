@@ -1,0 +1,37 @@
+/* novo-jogo.component.css */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  
+  img.flag {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border-radius: 4px;
+  }
+  
+  img.flag:hover {
+    transform: scale(1.1);
+  }
+  
+  img.flag.selecionado {
+    border: 2px solid #30caa0;
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  button.girar {
+    transition: transform 2s ease;
+  }
+  
+  button.girando {
+    animation: spin 2s ease;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(1080deg); }
+  }
+  

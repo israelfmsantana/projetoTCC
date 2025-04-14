@@ -1,0 +1,37 @@
+<div *ngIf="!detailsSchool">
+    <h2 class="mb-10 text-5xl font-extrabold text-center text-white">Coordenação</h2>
+
+
+    <div class="flex justify-center mb-12">
+        <input [(ngModel)]="filtro" type="text" placeholder="Pesquise por nome ou cargo..."
+            class="w-full max-w-lg p-4 text-xl text-gray-900 transition-all transform bg-gray-100 rounded-lg shadow-lg ml-96 focus:outline-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 hover:scale-105 focus:ring-4 focus:ring-teal-400">
+        <button class="px-6 py-4 ml-56 text-xl text-center text-white transition-all rounded-lg w-36 bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110" 
+            (click)="abrirModalCreateCoordination()">Adicionar
+        </button>
+    </div>
+
+    <app-createCoordination *ngIf="modalAberto" (fechar)="fecharModalCreateCoordination()"></app-createCoordination>
+
+    <button (click)="abrirDetailsCoordination()">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+            <div *ngFor="let membro of membrosFiltrados"
+                class="flex items-center p-8 space-x-6 text-white transition-all shadow-2xl bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 rounded-xl hover:scale-105 hover:shadow-xl">
+    
+                <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
+                    <i class="text-3xl text-teal-500 fas fa-users-cog"></i>
+                </div>
+
+                
+                <div class="flex flex-col space-y-3 text-left">
+                    <p class="text-3xl font-semibold text-white">{{ membro.nome }}</p>
+                    <p class="text-xl text-gray-200">{{ membro.cargo }}</p>
+                    <p class="text-xl text-gray-300">{{ membro.escola }}</p>
+                </div>
+            </div>
+        </div>
+    </button>
+</div>
+
+
+<app-viewDetails *ngIf="detailsSchool"></app-viewDetails>
+
