@@ -110,8 +110,7 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  providers: []
 
 })
 export class AppModule { }
