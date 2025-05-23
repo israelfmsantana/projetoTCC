@@ -5,7 +5,7 @@ import { RouterModule, Routes} from '@angular/router'
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuardConfirmedCoordination, AuthGuardConfirmedManager, AuthGuardConfirmedStudent, AuthGuardConfirmedTeachers, AuthGuardDenied } from '../Auth.guard';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+// import '@fortawesome/fontawesome-free/css/all.min.css';
 import { ToastrModule } from 'ngx-toastr';
 import "ngx-toastr/toastr";
 
