@@ -1,6 +1,6 @@
 {
   "build": {
     "buildCommand": "ng build",
-    "outputDirectory": "dist/my-first-app"
+    "outputDirectory": "dist/my-first-app/browser"
   }
 }
