@@ -18,17 +18,33 @@
                 <label for="email" class="block text-sm text-gray-600 dark:text-gray-300">Usuário</label>
                 <div class="flex items-center px-3 bg-gray-100 border rounded-lg dark:bg-gray-700">
                     <i class="text-gray-500 fas fa-user dark:text-gray-300"></i>
-                    <input type="text" id="email" placeholder="Digite seu usuário" class="w-full px-2 py-2 bg-transparent focus:outline-none">
+                    <input
+                        type="text"
+                        id="email"
+                        [(ngModel)]="usuarioLogin.email"
+                        (ngModelChange)="onInputChange('usuarioLogin.email', $event)"
+                        name="usuarioLogin.email"
+                        placeholder="Digite seu usuário"
+                        class="w-full px-2 py-2 bg-transparent focus:outline-none"
+                    />
                 </div>
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-sm text-gray-600 dark:text-gray-300">Senha</label>
                 <div class="flex items-center px-3 bg-gray-100 border rounded-lg dark:bg-gray-700">
                     <i class="text-gray-500 fas fa-lock dark:text-gray-300"></i>
-                    <input [(ngModel)]="senha" name="senha" type="password" id="password" placeholder="Digite sua senha" class="w-full px-2 py-2 bg-transparent focus:outline-none">
+                    <input
+                    [(ngModel)]="usuarioLogin.senha"
+                    (ngModelChange)="onInputChange('usuarioLogin.senha', $event)"
+                    name="usuarioLogin.senha"
+                    type="password"
+                    id="password"
+                    placeholder="Digite sua senha"
+                    class="w-full px-2 py-2 bg-transparent focus:outline-none"
+                  />
                 </div>
             </div>
-            <button type="submit" class="w-full py-2 mt-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700" (click)="entrar()">Entrar</button>
+            <button type="submit" class="w-full py-2 mt-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700" (click)="Login()">Entrar</button>
             <button type="submit" class="w-full py-2 mt-2 text-white bg-blue-900 rounded-lg hover:bg-blue-700" (click)="navigateTo('/signup')">Cadastrar</button>
         </form>
     </div>

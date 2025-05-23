@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { DarkModeService } from '../service/darkMode/dark-mode.service';
 
@@ -10,22 +10,44 @@ import { DarkModeService } from '../service/darkMode/dark-mode.service';
 export class viewStudentComponent implements OnInit {
 
     constructor(private router: Router, private darkModeService: DarkModeService) {}
-    
+
 
     ngOnInit(): void {
         localStorage.setItem('lastRoute', '/viewStudent');
+        this.verificaModalPesquisaAvancada();
+        this.verificaModalCS();
+        this.verificaModalDetalhes();
+    }
+
+    mostrarModalCS: boolean = false;
+    ExibirModalCreateStudent(mostrar: boolean) {
+        this.mostrarModalCS = mostrar;
+        if (mostrar){
+            localStorage.setItem('mostrarModalAd', 'student');
+        }
+        else {
+            localStorage.setItem('mostrarModalAd', '');
+        }
+    }
+
+    mostrarModalCSStorage: String;
+    verificaModalCS() {
+        this.mostrarModalCSStorage = localStorage.getItem('mostrarModalAd');
+        if (this.mostrarModalCSStorage === 'student') {
+            this.mostrarModalCS = true;
+        }
+        else {
+            this.mostrarModalCS = false;
+        }
     }
 
 
-
-    modalAberto: boolean = false;
-    
-
-    abrirModalCreateStudent() {
-        this.modalAberto = true;
-    }
-    fecharModalCreateStudent() {
-        this.modalAberto = false;
+    modalDetails: String;
+    verificaModalDetalhes() {
+        this.modalDetails = localStorage.getItem('details');
+        if (this.modalDetails === 'true'){
+            this.detailsSchool = true;
+        }
     }
 
 
@@ -55,7 +77,59 @@ export class viewStudentComponent implements OnInit {
 
 
     get alunosFiltrados() {
-        return this.membrosAlunos.filter(membro => 
+        return this.membrosAlunos.filter(membro =>
         membro.nome.toLowerCase().includes(this.filtroAluno.toLowerCase()));
+    }
+
+
+    anoSelecionados: string[] = [];
+
+    alternarAno(ano: string) {
+        const index = this.anoSelecionados.indexOf(ano);
+        if (index > -1) {
+            this.anoSelecionados.splice(index, 1); // Remove se já estava
+        } else {
+            this.anoSelecionados.push(ano); // Adiciona se não estava
+        }
+    }
+
+
+
+    mostrarModalPA: boolean = false;
+    mostrarModalPAStorage: String;
+    ExibirModalPA(mostrar: boolean) {
+        this.mostrarModalPA = mostrar;
+        if (mostrar){
+            localStorage.setItem('mostrarModalPA', 'student');
+        }
+        else {
+            localStorage.setItem('mostrarModalPA', '');
+        }
+    }
+
+    verificaModalPesquisaAvancada() {
+        this.mostrarModalPAStorage = localStorage.getItem('mostrarModalPA');
+        if(this.mostrarModalPAStorage === 'student') {
+            this.mostrarModalPA = true;
+        }
+        else {
+            this.mostrarModalPA = false;
+        }
+    }
+
+
+
+
+    @Input() detailsSchool: boolean = false; // Recebe do pai
+    @Input() perfil: String; // Recebe do pai
+    @Output() abrirDetalhes = new EventEmitter<void>(); // Envia para o pai
+
+    abrirDetalhesStudent() {
+        localStorage.setItem('localScroll', 'student');
+        this.abrirDetails();
+    }
+
+    abrirDetails() {
+        this.abrirDetalhes.emit();
     }
 }

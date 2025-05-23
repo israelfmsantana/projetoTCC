@@ -32,21 +32,23 @@
         <!-- Menu superior -->
         <header class="flex items-center justify-between p-6 text-white shadow-2xl bg-gradient-to-r from-slate-900 to-gray-950">
             <div class="flex flex-col ml-10">
-                <span class="text-4xl font-bold">Diretor</span>
-                <span class="text-3xl font-thin text-white">Lucas Magnago</span>
+                <span class="text-4xl font-bold">{{perfilUsuario}}</span>
+                <span class="text-3xl font-thin text-white">{{usuario.nome}}</span>
             </div>
             <div class="flex items-center space-x-6">
                 <!-- Dropdown de Perfis -->
-                <div class="relative">
-                    <button (click)="mostrarDropdown = !mostrarDropdown" class="px-6 py-4 text-white transition-all bg-blue-600 rounded-lg shadow-md hover:bg-blue-700">
+                <div *ngIf="perfis.length > 1" class="relative dropdown-container">
+                    <button (click)="mostrarDropdown = !mostrarDropdown"
+                        class="px-6 py-4 text-white transition-all bg-blue-600 rounded-lg shadow-md hover:bg-blue-700">
                         <i class="fa-solid fa-right-left"></i>
                     </button>
-          
+
                     <!-- Menu suspenso -->
                     <div *ngIf="mostrarDropdown" class="absolute right-0 z-10 w-56 mt-2 bg-white rounded-md shadow-lg">
-                        <button *ngFor="let perfil of perfis" [disabled]="perfil === perfilAtual" (click)="trocarPerfil(perfil)" class="flex items-center w-full px-4 py-3 space-x-3 text-lg text-left transition-colors rounded-md"
-                        [ngClass]="perfil === perfilAtual ? 'text-gray-400 bg-gray-100 cursor-not-allowed' : 'text-gray-800 hover:bg-gray-200'">
-                            <i class="text-xl" [ngClass]="perfil === 'Administrador' ? 'fa-solid fa-user-gear' : 'fas fa-users-cog'"></i>
+                        <button *ngFor="let perfil of perfis" [disabled]="perfil === perfilAtual" (click)="trocarPerfil(perfil)"
+                            class="flex items-center w-full px-4 py-3 space-x-3 text-lg text-left transition-colors rounded-md"
+                            [ngClass]="perfil === perfilAtual ? 'text-gray-400 bg-gray-100 cursor-not-allowed' : 'text-gray-800 hover:bg-gray-200'">
+                            <i class="text-xl" [ngClass]="perfil === 'Professor' ? 'fas fa-user-tie' : 'fas fa-users-cog'"></i>
                             <span>{{ perfil }}</span>
                         </button>
                     </div>
@@ -59,27 +61,24 @@
                 </button>
             </div>
         </header>
-        
-        
-        
+
+
+
 
         <!-- Conteúdo dinâmico -->
         <main class="flex-grow p-8 overflow-auto bg-gray-100 dark:bg-gray-800">
 
             <!-- Exibição da coordenação -->
-            <app-viewCoordination *ngIf="secaoAtual === 'coordenacao'"></app-viewCoordination>
-
+            <app-viewCoordination *ngIf="secaoAtual === 'coordenacao'" [detailsSchool]="detailsSchool" [perfil]="perfilAtual" (abrirDetalhes)="abrirDetalhes()"></app-viewCoordination>
 
 
             <!-- Exibição dos professores -->
-            <app-viewTeachers *ngIf="secaoAtual === 'professores'"></app-viewTeachers>
-            
-            
+            <app-viewTeachers *ngIf="secaoAtual === 'professores'" [detailsSchool]="detailsSchool" [perfil]="perfilAtual" (abrirDetalhes)="abrirDetalhes()"></app-viewTeachers>
 
 
             <!-- Exibição dos alunos -->
-            <app-viewStudent *ngIf="secaoAtual === 'alunos'"></app-viewStudent>
-            
+            <app-viewStudent *ngIf="secaoAtual === 'alunos'" [detailsSchool]="detailsSchool" [perfil]="perfilAtual" (abrirDetalhes)="abrirDetalhes()"></app-viewStudent>
+
         </main>
     </div>
 </div>

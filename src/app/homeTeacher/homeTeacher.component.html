@@ -5,10 +5,23 @@
         <img src="../../assets/icon/tcc/nome do sistema DarkMode.png" alt="">
         <nav>
             <ul class="space-y-6 mt-14 ">
+                <!-- <li class="bg-gradient-to-r from-slate-900" [ngClass]="secaoAtual === 'inicio' ? ' from-80% to-cyan-700' : 'to-gray-950'">
+                    <button (click)="selecionarSecao('inicio')"
+                    class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg hover:scale-105">
+                        <i class="text-2xl text-white fa-solid fa fa-home"></i>
+                        Início
+                    </button>
+                </li> -->
                 <li>
                     <button (click)="selecionarSecao('inicio')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
                         <i class="text-2xl text-white fa-solid fa fa-home"></i>
                         Início
+                    </button>
+                </li>
+                <li>
+                    <button (click)="selecionarSecao('Atividades')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
+                        <i class="text-2xl text-white fa-solid fa-book"></i>
+                        Atividades
                     </button>
                 </li>
                 <li>
@@ -27,20 +40,22 @@
         <header class="flex items-center justify-between p-6 text-white shadow-2xl bg-gradient-to-r from-slate-900 to-gray-950">
             <div class="flex flex-col ml-10">
                 <span class="text-4xl font-bold">Professor</span>
-                <span class="text-3xl font-thin text-white">Anker Hugo Loss</span>
+                <span class="text-3xl font-thin text-white">{{usuario.nome}}</span>
             </div>
             <div class="flex items-center space-x-6">
                 <!-- Dropdown de Perfis -->
-                <div class="relative">
-                    <button (click)="mostrarDropdown = !mostrarDropdown" class="px-6 py-4 text-white transition-all bg-blue-600 rounded-lg shadow-md hover:bg-blue-700">
+                <div *ngIf="perfis.length > 1" class="relative dropdown-container">
+                    <button (click)="mostrarDropdown = !mostrarDropdown"
+                        class="px-6 py-4 text-white transition-all bg-blue-600 rounded-lg shadow-md hover:bg-blue-700">
                         <i class="fa-solid fa-right-left"></i>
                     </button>
-          
+
                     <!-- Menu suspenso -->
                     <div *ngIf="mostrarDropdown" class="absolute right-0 z-10 w-56 mt-2 bg-white rounded-md shadow-lg">
-                        <button *ngFor="let perfil of perfis" [disabled]="perfil === perfilAtual" (click)="trocarPerfil(perfil)" class="flex items-center w-full px-4 py-3 space-x-3 text-lg text-left transition-colors rounded-md"
-                        [ngClass]="perfil === perfilAtual ? 'text-gray-400 bg-gray-100 cursor-not-allowed' : 'text-gray-800 hover:bg-gray-200'">
-                            <i class="text-xl" [ngClass]="perfil === 'Administrador' ? 'fa-solid fa-user-gear' : 'fas fa-users-cog'"></i>
+                        <button *ngFor="let perfil of perfis" [disabled]="perfil === perfilAtual" (click)="trocarPerfil(perfil)"
+                            class="flex items-center w-full px-4 py-3 space-x-3 text-lg text-left transition-colors rounded-md"
+                            [ngClass]="perfil === perfilAtual ? 'text-gray-400 bg-gray-100 cursor-not-allowed' : 'text-gray-800 hover:bg-gray-200'">
+                            <i class="text-xl" [ngClass]="perfil === 'Professor' ? 'fas fa-user-tie' : 'fas fa-users-cog'"></i>
                             <span>{{ perfil }}</span>
                         </button>
                     </div>
@@ -60,8 +75,9 @@
 
             <!-- Exibição dos professores -->
             <app-viewHomeTeacher *ngIf="secaoAtual === 'inicio'"></app-viewHomeTeacher>
-            <app-viewStudent *ngIf="secaoAtual === 'alunos'"></app-viewStudent>
-            
+            <app-viewActivitiesTeacher *ngIf="secaoAtual === 'Atividades'"></app-viewActivitiesTeacher>
+            <app-viewStudent *ngIf="secaoAtual === 'alunos'" [detailsSchool]="detailsSchool" [perfil]="perfilAtual" (abrirDetalhes)="abrirDetalhes()"></app-viewStudent>
+
         </main>
     </div>
 </div>

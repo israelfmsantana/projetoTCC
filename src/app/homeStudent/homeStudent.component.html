@@ -1,94 +1,118 @@
 <div class="flex h-screen bg-gradient-to-r from-cyan-400 via-teal-500 to-green-500">
-  <!-- Menu lateral -->
-  <aside class="p-8 text-white shadow-2xl w-80 bg-gradient-to-b from-cyan-800 to-cyan-950">
-      <!-- <h2 class="mb-8 text-3xl font-thin ml-7">Gestão Escolar</h2> -->
-      <img src="../../assets/icon/tcc/nome do sistema DarkMode.png" alt="">
-      <nav>
-          <ul class="space-y-6 mt-14 ">
-              <li>
-                  <button (click)="selecionarSecao('inicio')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
-                      <i class="text-2xl text-white fa-solid fa fa-home"></i>
-                      Início
-                  </button>
-              </li>
-              <li>
-                  <button (click)="selecionarSecao('Batalhas')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
-                      <i class="text-2xl text-white fa fa-gamepad"></i>
-                      Batalhas
-                  </button>
-              </li>
-              <li>
-                  <button (click)="selecionarSecao('Ranking')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
-                      <i class="text-2xl text-white fa fa-trophy"></i>
-                      Ranking
-                  </button>
-              </li>
-              <li>
-                  <button (click)="selecionarSecao('Amigos')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
-                      <i class="text-2xl text-white fa fa-users"></i>
-                      Amigos
-                  </button>
-              </li>
-          </ul>
-      </nav>
-  </aside>
+    <aside class="p-8 text-white shadow-2xl w-80 bg-gradient-to-b from-cyan-800 to-cyan-950">
+        <img src="../../assets/icon/tcc/nome do sistema DarkMode.png" alt="">
+        <nav>
+            <ul class="space-y-6 mt-14 ">
+                <li>
+                    <button (click)="selecionarSecao('inicio')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
+                        <i class="text-2xl text-white fa-solid fa fa-home"></i>
+                        Início
+                    </button>
+                </li>
+                <li>
+                    <button (click)="selecionarSecao('Atividades')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
+                        <i class="text-2xl text-white fa-solid fa-book"></i>
+                        Atividades
+                    </button>
+                </li>
+                <li>
+                    <button (click)="selecionarSecao('Batalhas')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
+                        <i class="text-2xl text-white fa fa-gamepad"></i>
+                        Batalhas
+                    </button>
+                </li>
+                <li>
+                    <button (click)="selecionarSecao('Loja')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
+                        <i class="text-2xl text-white fa-solid fa-cart-shopping"></i>
+                        Loja
+                    </button>
+                </li>
+                <li>
+                    <button (click)="selecionarSecao('Inventario')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
+                        <i class="text-2xl text-white fa-solid fa-briefcase"></i>
+                        Inventario
+                    </button>
+                </li>
+                <li>
+                    <button (click)="selecionarSecao('Desafios')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
+                        <i class="text-2xl text-white fa-solid fa-star"></i>
+                        Desafios
+                    </button>
+                </li>
+                <li>
+                    <button (click)="selecionarSecao('Ranking')" class="w-full px-6 py-4 text-2xl font-bold text-left transition-all bg-transparent rounded-lg bg-gradient-to-r hover:scale-105">
+                        <i class="text-2xl text-white fa fa-trophy"></i>
+                        Ranking
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </aside>
 
-  <!-- Conteúdo principal -->
-  <div class="flex flex-col flex-1 overflow-hidden">
-      <!-- Menu superior -->
-      <header class="flex items-center justify-between p-6 text-white shadow-2xl bg-gradient-to-r from-cyan-800 to-cyan-950">
-          <!-- <div class="flex flex-col ml-10"> -->
-          <div class="flex items-center gap-4 ml-10">
-            <img src="../../assets/pal/foxsparks.png" alt="Perfil" class="w-12 h-12 border-4 border-white rounded-full shadow-xl">
-            <div>
-              <span class="text-3xl font-thin text-white">Anker Loss</span>
-              <div class="flex items-center space-x-2 text-white">
-                <i class="mt-1 text-xl fa-solid fa-coins"></i>
-                <p class="mt-1 text-xl">1470</p>
-              </div>
+
+    <div class="flex flex-col flex-1 overflow-hidden">
+
+        <header class="flex items-center justify-between p-6 text-white shadow-2xl bg-gradient-to-r from-cyan-800 to-cyan-950">
+
+            <div class="flex items-center gap-4 ml-10">
+                <img src="../../assets/pal/foxsparks.png" alt="Perfil" class="w-12 h-12 border-4 border-white rounded-full shadow-xl">
+                <div>
+                <span class="text-3xl font-thin text-white">Anker Loss</span>
+                <div class="flex items-center space-x-2 text-white">
+                    <i class="mt-1 text-xl fa-solid fa-coins"></i>
+                    <p class="mt-1 text-xl">1470</p>
+                </div>
+                </div>
             </div>
-          </div>
-          
-          <div class="flex items-center space-x-6">
-              <!-- Botão de Notificação -->
-              <button (click)="toggleNotifications()" class="relative p-4 text-white transition-all bg-blue-600 rounded-lg shadow-md hover:bg-blue-700">
-                <i class="text-2xl fas fa-bell"></i>
-                <span class="absolute top-0 right-0 flex items-center justify-center w-4 h-4 text-xs text-white bg-red-500 rounded-full">3</span> <!-- Número de notificações -->
-              </button>
-      
-              <!-- Botão de Sair -->
-              <button class="px-6 py-4 text-white transition-all bg-red-500 rounded-lg shadow-md hover:bg-red-600" (click)="outLogin('/login')">Sair</button>
-          </div>
-      </header>
-      
-      <!-- Pop-up de Notificações -->
-      <div *ngIf="isNotificationsOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div class="p-6 bg-white rounded-lg shadow-lg w-80">
-              <h3 class="mb-4 text-xl font-semibold">Notificações</h3>
-              <ul class="space-y-3">
-                  <li class="text-gray-800">Nova mensagem de João</li>
-                  <li class="text-gray-800">Aula de Matemática marcada para amanhã</li>
-                  <li class="text-gray-800">Novo comentário no seu post</li>
-              </ul>
-              <button (click)="toggleNotifications()" class="w-full py-2 mt-4 text-white bg-red-500 rounded-lg hover:bg-red-600">Fechar</button>
-          </div>
-      </div>
-      
-      
-      
 
-      <!-- Conteúdo dinâmico -->
-      <main class="flex-grow p-8 overflow-auto bg-gray-100 dark:bg-sky-950">
+            <div class="flex items-center space-x-6">
+
+                <button (click)="toggleNotifications()" class="relative p-4 text-white transition-all bg-blue-600 rounded-lg shadow-md hover:bg-blue-700">
+                    <i class="text-2xl fas fa-bell"></i>
+                    <span class="absolute top-0 right-0 flex items-center justify-center w-4 h-4 text-xs text-white bg-red-500 rounded-full">3</span>
+                </button>
+
+                <button class="px-6 py-4 text-white transition-all bg-red-500 rounded-lg shadow-md hover:bg-red-600" (click)="outLogin('/login')">Sair</button>
+            </div>
+        </header>
 
 
-        <app-viewHomeStudent *ngIf="secaoAtual === 'inicio'"></app-viewHomeStudent>
+        <div *ngIf="isNotificationsOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+            <div class="p-6 bg-white rounded-lg shadow-lg w-80">
+                <h3 class="mb-4 text-xl font-semibold">Notificações</h3>
+                <ul class="space-y-3">
+                    <li class="text-gray-800">Nova mensagem de João</li>
+                    <li class="text-gray-800">Aula de Matemática marcada para amanhã</li>
+                    <li class="text-gray-800">Novo comentário no seu post</li>
+                </ul>
+                <button (click)="toggleNotifications()" class="w-full py-2 mt-4 text-white bg-red-500 rounded-lg hover:bg-red-600">Fechar</button>
+            </div>
+        </div>
 
-        <app-viewBattle *ngIf="secaoAtual === 'Batalhas'"></app-viewBattle>
 
-        <app-viewRaking *ngIf="secaoAtual === 'Ranking'"></app-viewRaking>
 
-        
-          
-      </main>
-  </div>
+
+
+        <main class="flex-grow p-8 overflow-auto bg-gray-100 dark:bg-sky-950">
+
+
+            <app-viewHomeStudent *ngIf="secaoAtual === 'inicio'"></app-viewHomeStudent>
+
+            <app-viewBattle *ngIf="secaoAtual === 'Batalhas'"></app-viewBattle>
+
+            <app-viewRanking *ngIf="secaoAtual === 'Ranking'"></app-viewRanking>
+
+            <app-viewActivitiesStudent *ngIf="secaoAtual === 'Atividades'"></app-viewActivitiesStudent>
+
+            <app-viewInventory *ngIf="secaoAtual === 'Inventario'"></app-viewInventory>
+
+            <app-viewChallenges *ngIf="secaoAtual === 'Desafios'"></app-viewChallenges>
+
+
+            <app-viewShop *ngIf="secaoAtual === 'Loja'"></app-viewShop>
+
+
+
+        </main>
+    </div>
 </div>

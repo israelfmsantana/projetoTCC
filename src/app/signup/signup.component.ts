@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { ConectUser } from '../../API';
-import { UserCreateDTO} from '../../Class';
 import { ToastrService } from 'ngx-toastr';
+import { Auth } from '../../Class';
+import { ConectAuth } from '../../API';
 
 
 @Component({
@@ -74,7 +75,7 @@ export class SignupComponent implements OnInit {
   //     timeOut: 2000,
   //   });
   // }
-  
+
   // showIncorrect() {
   //   this.toastr.error('Username or Password is incorrect', 'Incorrect', {
   //     timeOut: 2000,
@@ -94,7 +95,7 @@ export class SignupComponent implements OnInit {
   //   this.conectUser.CREATE(user).subscribe({
   //     next: () => {
   //       this.showSuccess();
-  //       this.navigateToLogin(); 
+  //       this.navigateToLogin();
   //     },
   //     error: (error: any) => {
   //       if (error.status === 422)
