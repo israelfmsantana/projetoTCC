@@ -1,162 +1,150 @@
+export class Escola {
+    id: number;
+    nome: string;
+    sigla: string;
+    inep: string;
+    telefone: string;
+    tipoUnidadeId: number;
+    usuarioIdentifier: string;
+}
+
+export class Usuario {
+    id: number;
+    nome: string;
+    dataNascimento: string;
+    email: string;
+    dataUltimoLogin: Date;
+    dataCadastro: Date;
+    ativo: boolean;
+
+}
+
+
+export class addProfessorToTurma {
+    professorId: number;
+    turmaId: number;
+    disciplinaId: number;
+}
+
+
+export class Alternativa {
+    texto: string;
+    ordem: number;
+    questaoId: number;
+}
+
+
+export class Aluno {
+    id: number;
+}
+
+
+export class AlunoAtividade {
+    alunoId: number;
+    atividadeId: number;
+}
+
+
+export class Atividade {
+    titulo: string;
+    descricao: string;
+    valor: number;
+    tempoLimiteSegundos: number;
+    professorId: number;
+}
+
+
+export class QuestaoAtividade {
+    questaoId: number;
+    atividadeId: number;
+}
+
+
+export class RespostaAtividade {
+    alunoId: number;
+    atividadeId: number;
+    questaoId: number;
+    alternativaEscolhaId: number;
+}
+
+
+export class AtividadeTurma {
+    dataAtribuicao: Date;
+    dataEntrega: Date;
+    atividadeId: number;
+    turmaId: number;
+    disciplinaId: number;
+}
+
+
+export class Auth {
+    nome: string;
+    dataNascimento: string;
+    email: string;
+    senha: string;
+    isAluno: boolean;
+}
 export class Login {
-  username: string;
-  password: string;
+    email: string;
+    senha: string;
 }
 
 
-
-export class User {
-  id?: number;
-  username: string;
-  password: string;
-  profile: ProfileEnum;
-}
-export class UserCreateDTO {
-  username: string;
-  password: string;
-}
-export class UserUpdateDTO {
-  id?: number;
-  password: string;
+export class Batalha {
+    tempoLimiteSegundos: number;
 }
 
 
-
-export enum ProfileEnum {
-  USER = 'user',
-  ADMIN = 'admin',
+export class BatalhaResposta {
+    alunoId: number;
+    batalhaId: number;
+    questaoId: number;
+    alternativaEscolhaId: number;
 }
 
 
-
-export class Pal {
-  id?: number;
-  name: string;
-  power: string;
-}
-export class PalCreateDTO {
-  name: string;
-  power: string;
-}
-export class PalUpdateDTO {
-  id?: number;
-  name: string;
-  power: string;
+export class Disciplina {
+    descricao: string;
+    sigla: string;
 }
 
 
-
-export class Resource {
-  id?: number;
-  name: string;
-}
-export class ResourceCreateDTO {
-  name: string;
-}
-export class ResourceUpdateDTO {
-  id?: number;
-  name: string;
+export class Questao {
+    enunciado: string;
+    resposta: string;
+    nivelEscola: number;
+    disciplinaId: number;
+    usuarioCriacaoId: number;
 }
 
 
-export class Element {
-  id?: number;
-  name: string;
-}
-export class ElementCreateDTO {
-  name: string;
-}
-export class ElementUpdateDTO {
-  id?: number;
-  name: string;
+export class Turma {
+    descricao: string;
+    turno: number;
+    nivelEscolar: number;
+    ano: number;
+    cursoId: number;
+    periodoLetivoId: number;
+    escolaId: number;
 }
 
 
-
-export class Activity {
-  id?: number;
-  name: string;
-}
-export class ActivityCreateDTO {
-  name: string;
-}
-export class ActivityUpdateDTO {
-  id?: number;
-  name: string;
+export class UsuarioEscolaPerfil {
+    usuarioId: number;
+    escolaId: number;
+    perfilId: number;
 }
 
 
-
-
-
-
-
-
-
-
-
-export class HaveResource {
-  id?: number;
-  resource: Resource;
-  pal: Pal;
-}
-export class HaveResourceCreateDTO {
-  palId: number;
-  resourceId: number;
-}
-export class HaveResourceUpdateDTO {
-  id?: number;
-  palId: number;
-  resourceId: number;
+export class Perfil {
+    id: number;
+    nome: string;
 }
 
-
-
-export class HavePal {
-  id?: number;
-  user: User;
-  pal: Pal;
-}
-export class HavePalCreateDTO {
-  palId: number;
-  userId: number;
-}
-export class HavePalUpdateDTO {
-  id?: number;
-  palId: number;
-  userId: number;
+export class ResponseUsuarioEscolaPerfil {
+    usuario: Auth;
+    escola: Escola;
+    perfil: Perfil;
+    ativo: boolean;
 }
 
-
-
-export class HaveElement {
-  id?: number;
-  element: Element;
-  pal: Pal;
-}
-export class HaveElementCreateDTO {
-  palId: number;
-  elementId: number;
-}
-export class HaveElementUpdateDTO {
-  id?: number;
-  palId: number;
-  elementId: number;
-}
-
-
-
-export class HaveActivity {
-  id?: number;
-  activity: Activity;
-  pal: Pal;
-}
-export class HaveActivityCreateDTO {
-  palId: number;
-  activityId: number;
-}
-export class HaveActivityUpdateDTO {
-  id?: number;
-  palId: number;
-  activityId: number;
-}

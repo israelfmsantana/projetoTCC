@@ -38,17 +38,26 @@ export class viewBattleComponent implements OnInit {
         preco: 30,
         },
     ];
-    
+
     lojaItemAtual = this.lojaItens[0];
     itemIndexAtual = 0;
     nivelAtual = 4; // Você pode substituir pelo nível real do aluno
-    
+
     ngOnInit() {
         localStorage.setItem('lastRoute', '/viewBattle');
         setInterval(() => {
         this.itemIndexAtual = (this.itemIndexAtual + 1) % this.lojaItens.length;
         this.lojaItemAtual = this.lojaItens[this.itemIndexAtual];
         }, 4000); // troca a cada 4 segundos
+    }
+
+
+    mostrarModalBatalha = false;
+    ExibirModalBatalha(mostrar: boolean) {
+        this.mostrarModalBatalha = mostrar;
+        if (mostrar){
+            this.procurarBatalha();
+        }
     }
 
 
@@ -152,4 +161,126 @@ export class viewBattleComponent implements OnInit {
         this.faseAtual++;
         }, 2000);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    etapa = 'buscando'; // 'buscando' | 'materia' | 'perguntas'
+    materiaSorteada = '';
+    perguntaAtual = 0;
+    perguntas = [
+        {
+          texto: 'Qual é o resultado de 7 x 8?',
+          alternativas: [
+            { id: 'a', texto: '54' },
+            { id: 'b', texto: '56' },
+            { id: 'c', texto: '58' },
+            { id: 'd', texto: '64' }
+          ]
+        },
+        {
+          texto: 'Qual o principal órgão responsável pela digestão?',
+          alternativas: [
+            { id: 'a', texto: 'Estômago' },
+            { id: 'b', texto: 'Intestino Grosso' },
+            { id: 'c', texto: 'Pâncreas' },
+            { id: 'd', texto: 'Pulmão' }
+          ]
+        },
+        {
+          texto: 'Quem foi o primeiro presidente do Brasil?',
+          alternativas: [
+            { id: 'a', texto: 'Getúlio Vargas' },
+            { id: 'b', texto: 'Marechal Deodoro da Fonseca' },
+            { id: 'c', texto: 'Juscelino Kubitschek' },
+            { id: 'd', texto: 'Dom Pedro II' }
+          ]
+        },
+        {
+          texto: 'Em que continente fica o Egito?',
+          alternativas: [
+            { id: 'a', texto: 'Ásia' },
+            { id: 'b', texto: 'Europa' },
+            { id: 'c', texto: 'África' },
+            { id: 'd', texto: 'América' }
+          ]
+        },
+        {
+          texto: 'O que é um átomo?',
+          alternativas: [
+            { id: 'a', texto: 'Um tipo de célula' },
+            { id: 'b', texto: 'A menor parte de uma substância' },
+            { id: 'c', texto: 'Um órgão do corpo humano' },
+            { id: 'd', texto: 'Um tipo de animal microscópico' }
+          ]
+        }
+      ];
+       // Array de 5 perguntas
+    respostas = [null, null, null, null, null];
+
+    procurarBatalha() {
+        this.etapa = 'buscando';
+        setTimeout(() => {
+            this.sorteiaMateria();
+        }, 2000); // Simula delay
+    }
+
+    desafiarBatalha() {
+        this.mostrarModalBatalha = true;
+        this.sorteiaMateria();
+    }
+
+
+    sorteiaMateria() {
+        const materias = ['Matemática', 'Ciências', 'História', 'Geografia'];
+        this.etapa = 'achou';
+        setTimeout(() => {
+            this.materiaSorteada = materias[Math.floor(Math.random() * materias.length)];
+            this.etapa = 'materia';
+        }, 4000); // Simula delay
+
+
+        setTimeout(() => {
+                this.carregarPerguntas();
+            }, 10000);
+    }
+
+    carregarPerguntas() {
+        this.etapa = 'perguntas';
+        // você pode buscar as perguntas aqui com base na matéria
+    }
+
+    avancarPergunta() {
+        if (this.perguntaAtual < 4) this.perguntaAtual++;
+    }
+
+    voltarPergunta() {
+        if (this.perguntaAtual > 0) this.perguntaAtual--;
+    }
+
+    confirmarRespostas() {
+        // Enviar respostas para o backend
+        console.log(this.respostas);
+        this.mostrarModalBatalha = false;
+    }
+
 }

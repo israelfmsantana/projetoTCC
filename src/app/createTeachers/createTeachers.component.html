@@ -1,13 +1,128 @@
-<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" (click)="fecharModal()">
-    <div class="w-1/3 p-6 bg-white rounded-lg shadow-xl" (click)="$event.stopPropagation()">
-        <h2 class="mb-4 text-2xl font-bold text-black">Adicionar Professor</h2>
+<!-- Modal de Adicionar Coordenação -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+    <div class="relative w-full max-w-xl p-8 bg-white shadow-2xl rounded-2xl">
+        <h2 class="mb-6 text-3xl font-bold text-gray-800">Adicionar Professor</h2>
 
-        <label class="block mb-2 text-lg text-gray-700">Nome:</label>
-        <input type="text" [(ngModel)]="nome" class="w-full p-3 mb-4 border rounded-lg">
+        <!-- Cargos -->
+        <div class="mt-6">
+            <div>
+                <label class="block mb-1 font-medium text-gray-700 ">Nome</label>
+                <input [(ngModel)]="nome" type="text" class="w-full p-3 bg-gray-200 rounded-lg focus:outline-none">
+            </div>
+            <div>
+                <label class="block mb-1 font-medium text-gray-700 ">Escola</label>
+                <input [(ngModel)]="escola" type="text" class="w-full p-3 bg-gray-200 rounded-lg focus:outline-none">
+            </div>
+            <div>
+                <label class="block mb-1 font-medium text-gray-700 ">Email</label>
+                <input [(ngModel)]="email" type="text" class="w-full p-3 bg-gray-200 rounded-lg focus:outline-none">
+            </div>
+            <label class="block mb-2 font-medium text-gray-700">Matéria</label>
+            <div class="flex flex-wrap gap-2">
+                <button (click)="alternarMateria('portugues')"
+                    [ngClass]="{ 'bg-gray-600 text-white': materiaSelecionados.includes('portugues'), 'bg-gray-100 text-gray-800': !materiaSelecionados.includes('portugues')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Português
+                </button>
 
-        <div class="flex justify-end space-x-4">
-            <button class="px-6 py-3 text-white bg-red-500 rounded-lg" (click)="fecharModal()">Cancelar</button>
-            <button class="px-6 py-3 text-white bg-green-500 rounded-lg" (click)="salvarProfessor()">Salvar</button>
+                <button (click)="alternarMateria('matematica')"
+                    [ngClass]="{ 'bg-blue-600 text-white': materiaSelecionados.includes('matematica'), 'bg-blue-100 text-blue-800': !materiaSelecionados.includes('matematica')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Matemática
+                </button>
+
+                <button (click)="alternarMateria('ciencias')"
+                    [ngClass]="{ 'bg-yellow-300 text-white': materiaSelecionados.includes('ciencias'), 'bg-yellow-100 text-yellow-500': !materiaSelecionados.includes('ciencias')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Ciências
+                </button>
+                <button (click)="alternarMateria('historia')"
+                    [ngClass]="{ 'bg-yellow-700 text-white': materiaSelecionados.includes('historia'), 'bg-yellow-200 text-yellow-900': !materiaSelecionados.includes('historia')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    História
+                </button>
+                <button (click)="alternarMateria('geografia')"
+                    [ngClass]="{ 'bg-green-600 text-white': materiaSelecionados.includes('geografia'), 'bg-green-100 text-green-800': !materiaSelecionados.includes('geografia')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Geografia
+                </button>
+                <button (click)="alternarMateria('arte')"
+                    [ngClass]="{ 'bg-pink-600 text-white': materiaSelecionados.includes('arte'), 'bg-pink-100 text-pink-800': !materiaSelecionados.includes('arte')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Arte
+                </button>
+                <button (click)="alternarMateria('educacaoFisica')"
+                    [ngClass]="{ 'bg-orange-600 text-white': materiaSelecionados.includes('educacaoFisica'), 'bg-orange-100 text-orange-800': !materiaSelecionados.includes('educacaoFisica')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Educação Física
+                </button>
+                <button (click)="alternarMateria('ingles')"
+                    [ngClass]="{ 'bg-purple-600 text-white': materiaSelecionados.includes('ingles'), 'bg-purple-100 text-purple-800': !materiaSelecionados.includes('ingles')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Ingles
+                </button>
+                <button (click)="alternarMateria('sociologia')"
+                    [ngClass]="{ 'bg-purple-800 text-white': materiaSelecionados.includes('sociologia'), 'bg-purple-200 text-purple-900': !materiaSelecionados.includes('sociologia')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Sociologia
+                </button>
+                <button (click)="alternarMateria('filosofia')"
+                    [ngClass]="{ 'bg-amber-300 text-white': materiaSelecionados.includes('filosofia'), 'bg-amber-100 text-amber-400': !materiaSelecionados.includes('filosofia')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Filosofia
+                </button>
+                <button (click)="alternarMateria('biologia')"
+                    [ngClass]="{ 'bg-green-800 text-white': materiaSelecionados.includes('biologia'), 'bg-green-200 text-green-900': !materiaSelecionados.includes('biologia')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Biologia
+                </button>
+                <button (click)="alternarMateria('fisica')"
+                    [ngClass]="{ 'bg-blue-800 text-white': materiaSelecionados.includes('fisica'), 'bg-blue-200 text-blue-900': !materiaSelecionados.includes('fisica')}"
+                    class="px-4 py-2 transition rounded-lg">
+                    Física
+                </button>
+            </div>
+
+            <label class="block mb-2 font-medium text-gray-700">Ano</label>
+            <div class="flex flex-wrap gap-2">
+                <button
+                    (click)="alternarAno('sexto')"
+                    [ngClass]="anoSelecionados === 'sexto' ? 'bg-sky-300 text-white' : 'bg-sky-100 text-sky-500'"
+                    class="px-4 py-2 transition rounded-lg">
+                    6º
+                </button>
+                <button
+                    (click)="alternarAno('setimo')"
+                    [ngClass]="anoSelecionados === 'setimo' ? 'bg-emerald-300 text-white' : 'bg-emerald-100 text-emerald-500'"
+                    class="px-4 py-2 transition rounded-lg">
+                    7º
+                </button>
+                <button
+                    (click)="alternarAno('oitavo')"
+                    [ngClass]="anoSelecionados === 'oitavo' ? 'bg-amber-300 text-white' : 'bg-amber-100 text-amber-500'"
+                    class="px-4 py-2 transition rounded-lg">
+                    8º
+                </button>
+                <button
+                    (click)="alternarAno('nono')"
+                    [ngClass]="anoSelecionados === 'nono' ? 'bg-rose-400 text-white' : 'bg-rose-100 text-rose-600'"
+                    class="px-4 py-2 transition rounded-lg">
+                    9º
+                </button>
+            </div>
         </div>
+
+        <div class="grid gap-6">
+            <!-- Botões -->
+            <div class="flex justify-end mt-4 space-x-4">
+                <button class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">Limpar</button>
+                <button (click)="cadastrarProfessor()" class="px-6 py-2 text-white bg-green-600 rounded hover:bg-green-800">Cadastrar</button>
+            </div>
+        </div>
+
+        <!-- Botão de fechar (X) -->
+        <button class="absolute text-gray-500 top-4 right-4 hover:text-red-500" (click)="fecharModalAdicionar()">
+            <i class="text-xl fa-solid fa-times"></i>
+        </button>
     </div>
 </div>

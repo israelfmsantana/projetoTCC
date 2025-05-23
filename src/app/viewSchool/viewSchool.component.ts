@@ -1,6 +1,9 @@
+import { ConectEscola } from './../../API';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { DarkModeService } from '../service/darkMode/dark-mode.service';
+import { Escola } from '../../Class';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
     selector: 'app-viewSchool',
@@ -9,48 +12,65 @@ import { DarkModeService } from '../service/darkMode/dark-mode.service';
 })
 export class viewSchoolComponent implements OnInit {
 
-    constructor(private router: Router, private darkModeService: DarkModeService) {}
-    
+    GetAll(): void {
+        const token = localStorage.getItem('Authorization');
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+        this.conectEscola.GETall(headers).subscribe({
+            next: (p) => {
+                this.listaEscolas = p;
+            },
+            error: (err) => {
+                console.error('Erro ao buscar escolas:', err);
+            }
+        });
+    }
+
+    constructor(private router: Router, private darkModeService: DarkModeService, private conectEscola: ConectEscola) {}
+
 
     ngOnInit(): void {
         localStorage.setItem('lastRoute', '/viewSchool');
+        this.verificaModalPesquisaAvancada();
+        this.verificaModalDetalhes();
+
+        this.GetAll();
+
+
     }
 
 
-    modalAberto: boolean = false;
+
+    modalAbertoCreate: boolean = false;
+    modalDetails: String;
+    verificaModalDetalhes() {
+        this.modalDetails = localStorage.getItem('details');
+        if (this.modalDetails === 'true'){
+            this.detailsSchool = true;
+        }
+    }
     abrirModalCreateSchool() {
-        this.modalAberto = true;
+        this.modalAbertoCreate = true;
     }
     fecharModalCreateSchool() {
-        this.modalAberto = false;
+        this.modalAbertoCreate = false;
     }
 
 
 
     filtroEscolas: string = '';
-    listaEscolas = [
-        { nome: 'EEEFM Alfredo Chaves', diretor: 'João Silva', coordenador: 'Maria Oliveira', colocacao: "1" },
-        { nome: 'EEEFM São José', diretor: 'Ana Souza', coordenador: 'Pedro Santos', colocacao: "4" },
-        { nome: 'EMEF Professor Antônio Carlos Santos', diretor: 'Ricardo Alves', coordenador: 'Tatiane Rocha', colocacao: "2" },
-        { nome: 'EEEFM São Domingos', diretor: 'Fernando Ribeiro', coordenador: 'Juliana Costa', colocacao: "6" },
-        { nome: 'EEEFM Manoel Vieira Lessa', diretor: 'Lucas Martins', coordenador: 'Beatriz Ferreira', colocacao: "7" },
-        { nome: 'EEEFM Zélia Viana', diretor: 'Paulo César', coordenador: 'Vanessa Lima', colocacao: "5" },
-        { nome: 'EEEFM Dom João Batista', diretor: 'André Santos', coordenador: 'Camila Souza', colocacao: "8" },
-        { nome: 'EMEF Professora Hilda Miranda', diretor: 'Mariana Nunes', coordenador: 'Roberto Farias', colocacao: "9" },
-        { nome: 'EMEF Professor Paulo Freire', diretor: 'Bruno Costa', coordenador: 'Carla Andrade', colocacao: "3" },
-    ];
+    listaEscolas: Escola[] = [];
 
     filtroDiretor = '';
     filtroCoordenador = '';
-    mostrarModal = false;
+
 
     get escolasFiltrados() {
-    return this.listaEscolas.filter(escola =>
-        escola.nome.toLowerCase().includes(this.filtroEscolas.toLowerCase()) &&
-        escola.diretor.toLowerCase().includes(this.filtroDiretor.toLowerCase()) &&
-        escola.coordenador.toLowerCase().includes(this.filtroCoordenador.toLowerCase())
-    );
+        if (!this.filtroEscolas) return this.listaEscolas;
+        return this.listaEscolas.filter(escola =>
+            escola.nome.toLowerCase().includes(this.filtroEscolas.toLowerCase())
+        );
     }
+
 
     limparFiltros() {
         this.filtroDiretor = '';
@@ -58,13 +78,60 @@ export class viewSchoolComponent implements OnInit {
         this.filtroEscolas = '';
     }
 
+    cargosSelecionados: string[] = [];
+
+    alternarCargo(cargo: string) {
+        const index = this.cargosSelecionados.indexOf(cargo);
+        if (index > -1) {
+            this.cargosSelecionados.splice(index, 1); // Remove se já estava
+        } else {
+            this.cargosSelecionados.push(cargo); // Adiciona se não estava
+        }
+    }
+
+    ordemColocacao: 'asc' | 'desc' = 'asc';
+
+    alternarOrdenacao() {
+        this.ordemColocacao = this.ordemColocacao === 'asc' ? 'desc' : 'asc';
+
+    }
+
+    mostrarModalPA: boolean;
+    mostrarModalPAStorage: String;
+    ExibirModalPA(mostrar: boolean) {
+        this.mostrarModalPA = mostrar;
+        if (mostrar){
+            localStorage.setItem('mostrarModalPA', 'school');
+        }
+        else {
+            localStorage.setItem('mostrarModalPA', '');
+        }
+    }
+
+    verificaModalPesquisaAvancada() {
+        this.mostrarModalPAStorage = localStorage.getItem('mostrarModalPA');
+        if(this.mostrarModalPAStorage === 'school') {
+            this.mostrarModalPA = true;
+        }
+        else {
+            this.mostrarModalPA = false;
+        }
+    }
+
+
 
 
 
     @Input() detailsSchool: boolean = false; // Recebe do pai
+    @Input() perfil: String; // Recebe do pai
     @Output() abrirDetalhes = new EventEmitter<void>(); // Envia para o pai
 
-    abrirDetailsSchool() {
-        this.abrirDetalhes.emit(); 
+    abrirDetalhesSchool() {
+        localStorage.setItem('localScroll', 'school');
+        this.abrirDetails();
+    }
+
+    abrirDetails() {
+        this.abrirDetalhes.emit();
     }
 }

@@ -1,6 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { DarkModeService } from '../service/darkMode/dark-mode.service';
+import { Escola, Usuario } from '../../Class';
+import { HttpHeaders } from '@angular/common/http';
+import { ConectEscola, ConectUsuario, ConectUsuarioEscolaPerfil } from '../../API';
 
 @Component({
     selector: 'app-viewTeachers',
@@ -9,55 +12,150 @@ import { DarkModeService } from '../service/darkMode/dark-mode.service';
 })
 export class viewTeachersComponent implements OnInit {
 
-    constructor(private router: Router, private darkModeService: DarkModeService) {}
-    
+    constructor(private conectUsuario: ConectUsuario, private conectEscola: ConectEscola, private ConectUsuarioEscolaPerfil: ConectUsuarioEscolaPerfil,private router: Router, private darkModeService: DarkModeService) {}
+
+
+    listaEscolas: Escola[] = [];
+    listaUsuarioCoordencao: Usuario[] = [];
+    GetAll(): void {
+        const token = localStorage.getItem('Authorization');
+        const headersBearer = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+        this.conectEscola.GETall(headersBearer).subscribe({
+            next: (p) => {
+                this.listaEscolas = p;
+
+                for(let escola of this.listaEscolas) {
+                    this.conectUsuario.GETallByEscolaIdAndPerfilId(escola.id, 3, headersBearer).subscribe({
+                        next: (p) => {
+                            this.listaUsuarioCoordencao.push(...p);
+
+                            for( let coordenacao of this.listaUsuarioCoordencao ) {
+                                this.membrosProfessores.push({nome: coordenacao.nome, escola1: escola.nome, escola2: '' })
+                            }
+                        },
+                        error: (err) => {
+                            console.error('Erro ao buscar escolas:', err);
+                        }
+                    });
+                }
+            },
+            error: (err) => {
+                console.error('Erro ao buscar escolas:', err);
+            }
+        });
+
+    }
 
     ngOnInit(): void {
         localStorage.setItem('lastRoute', '/viewTeachers');
+        this.verificaModalPesquisaAvancada();
+        this.verificaModalCT();
+        this.verificaModalDetalhes();
+        this.GetAll();
     }
 
 
-    modalAberto: boolean = false;
-    
-
-    abrirModalCreateTeachers() {
-        this.modalAberto = true;
+    mostrarModalCT: boolean = false;
+    ExibirModalCreateTeachers(mostrar: boolean) {
+        this.mostrarModalCT = mostrar;
+        if (mostrar){
+            localStorage.setItem('mostrarModalAd', 'teacher');
+        }
+        else {
+            localStorage.setItem('mostrarModalAd', '');
+        }
     }
-    fecharModalCreateTeachers() {
-        this.modalAberto = false;
+
+    mostrarModalCTStorage: String;
+    verificaModalCT() {
+        this.mostrarModalCTStorage = localStorage.getItem('mostrarModalAd');
+        if (this.mostrarModalCTStorage === 'teacher') {
+            this.mostrarModalCT = true;
+        }
+        else {
+            this.mostrarModalCT = false;
+        }
     }
 
 
 
 
     filtroProf: string = '';
-    membrosProfessores = [
-        { nome: 'João Pereira Lima', escola1: 'EEEFM Alfredo Chaves', escola2: 'EMEF Professor Antônio Carlos Santos' },
-        { nome: 'Mariana Costa Oliveira', escola1: 'EEEFM São José', escola2: '' },
-        { nome: 'Carlos Mendes Rocha', escola1: 'EEEFM Alfredo Chaves', escola2: 'EEEFM São José' },
-        { nome: 'Fernanda Souza Martins', escola1: '', escola2: 'EEEFM São José' },
-        { nome: 'Ricardo Gomes Nunes', escola1: 'EEEFM São José', escola2: '' },
-        { nome: 'Paula Fernandes Cardoso', escola1: 'EMEF Professor Antônio Carlos Santos', escola2: '' },
-        { nome: 'Lucas Silva Ribeiro', escola1: 'EMEF Professor Antônio Carlos Santos', escola2: 'EEEFM São José' },
-        { nome: 'Juliana Almeida Castro', escola1: '', escola2: 'EEEFM Alfredo Chaves' },
-        { nome: 'Eduardo Farias Mendes', escola1: 'EEEFM Alfredo Chaves', escola2: '' },
-        { nome: 'Camila Lopes Nogueira', escola1: '', escola2: 'EMEF Professor Antônio Carlos Santos' },
-        { nome: 'Bruno Rodrigues Lima', escola1: 'EEEFM São José', escola2: '' },
-        { nome: 'Letícia Nunes Ferreira', escola1: '', escola2: 'EEEFM Alfredo Chaves' },
-        { nome: 'Tatiane Rocha Almeida', escola1: 'EEEFM Alfredo Chaves', escola2: 'EEEFM São José' },
-        { nome: 'Gustavo Martins Farias', escola1: '', escola2: 'EEEFM Alfredo Chaves' },
-        { nome: 'Vanessa Mendes Souza', escola1: 'EEEFM São José', escola2: '' },
-        { nome: 'Pedro Cardoso Ribeiro', escola1: 'EEEFM Alfredo Chaves', escola2: 'EMEF Professor Antônio Carlos Santos' },
-        { nome: 'Ana Nogueira Castro', escola1: 'EEEFM São José', escola2: 'EEEFM Alfredo Chaves' },
-        { nome: 'Fernando Oliveira Nunes', escola1: 'EEEFM Alfredo Chaves', escola2: '' },
-        { nome: 'Roberto Costa Lima', escola1: 'EMEF Professor Antônio Carlos Santos', escola2: 'EEEFM São José' },
-        { nome: 'Tatiane Souza Mendes', escola1: '', escola2: 'EMEF Professor Antônio Carlos Santos' }
-    ];
-
+    membrosProfessores: { nome: string; escola1: string; escola2: string }[] = [];
 
 
     get professoresFiltrados() {
-        return this.membrosProfessores.filter(membro => 
+        return this.membrosProfessores.filter(membro =>
         membro.nome.toLowerCase().includes(this.filtroProf.toLowerCase()));
+    }
+
+    materiaSelecionados: string[] = [];
+
+    alternarMateria(materia: string) {
+        const index = this.materiaSelecionados.indexOf(materia);
+        if (index > -1) {
+            this.materiaSelecionados.splice(index, 1); // Remove se já estava
+        } else {
+            this.materiaSelecionados.push(materia); // Adiciona se não estava
+        }
+    }
+
+    modalDetails: String;
+    verificaModalDetalhes() {
+        this.modalDetails = localStorage.getItem('details');
+        if (this.modalDetails === 'true'){
+            this.detailsSchool = true;
+        }
+    }
+
+
+    anoSelecionados: string[] = [];
+
+    alternarAno(ano: string) {
+        const index = this.anoSelecionados.indexOf(ano);
+        if (index > -1) {
+            this.anoSelecionados.splice(index, 1); // Remove se já estava
+        } else {
+            this.anoSelecionados.push(ano); // Adiciona se não estava
+        }
+    }
+
+
+    mostrarModalPA = false;
+    mostrarModalPAStorage: String;
+    ExibirModalPA(mostrar: boolean) {
+        this.mostrarModalPA = mostrar;
+        if (mostrar){
+            localStorage.setItem('mostrarModalPA', 'teacher');
+        }
+        else {
+            localStorage.setItem('mostrarModalPA', '');
+        }
+    }
+
+    verificaModalPesquisaAvancada() {
+        this.mostrarModalPAStorage = localStorage.getItem('mostrarModalPA');
+        if(this.mostrarModalPAStorage === 'teacher') {
+            this.mostrarModalPA = true;
+        }
+        else {
+            this.mostrarModalPA = false;
+        }
+    }
+
+
+
+
+    @Input() detailsSchool: boolean = false; // Recebe do pai
+    @Input() perfil: String; // Recebe do pai
+    @Output() abrirDetalhes = new EventEmitter<void>(); // Envia para o pai
+
+    abrirDetalhesTeachers() {
+        localStorage.setItem('localScroll', 'teacher');
+        this.abrirDetails();
+    }
+
+    abrirDetails() {
+        this.abrirDetalhes.emit();
     }
 }

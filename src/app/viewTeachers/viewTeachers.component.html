@@ -1,36 +1,173 @@
-<h2 class="mb-10 text-5xl font-extrabold text-center text-white">Professores</h2>
-            
-<!-- Barra de pesquisa -->
-<div class="flex justify-center mb-12">
-    <input [(ngModel)]="filtroProf" type="text" placeholder="Pesquise por nome ou escola" 
-    class="w-full max-w-lg p-4 text-xl text-gray-900 transition-all transform bg-gray-100 rounded-lg shadow-lg ml-96 focus:outline-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 hover:scale-105 focus:ring-4 focus:ring-teal-400">
-    <button class="px-6 py-4 ml-56 text-xl text-center text-white transition-all rounded-lg w-36 bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110" 
-        (click)="abrirModalCreateTeachers()">Adicionar
+<div *ngIf="!detailsSchool">
+    <h2 class="mb-10 text-5xl font-extrabold text-center text-white">Professores</h2>
+
+    <!-- Barra de pesquisa + botão -->
+    <div class="flex items-center justify-center mb-12 ml-96">
+        <input [(ngModel)]="filtroEscolas" type="text" placeholder="Pesquise por nome ou escola"
+        class="w-full max-w-lg p-4 text-xl text-gray-900 transition-all transform bg-gray-100 rounded-lg shadow-lg focus:outline-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 focus:ring-4 focus:ring-teal-400" />
+
+        <button class="px-6 py-4 ml-4 text-xl text-white bg-teal-800 rounded-lg shadow-md hover:bg-teal-700" (click)="ExibirModalPA(true)">
+            Pesquisa Avançada
+        </button>
+
+        <button class="px-6 py-4 ml-32 text-xl text-center text-white transition-all rounded-lg w-36 bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110"
+            (click)="ExibirModalCreateTeachers(true)">Adicionar
+        </button>
+    </div>
+
+    <!-- Modal de Pesquisa Avançada -->
+    <div *ngIf="mostrarModalPA" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <div class="relative w-full max-w-xl p-8 bg-white shadow-2xl rounded-2xl">
+            <h2 class="mb-6 text-3xl font-bold text-gray-800">Pesquisa Avançada</h2>
+
+            <!-- Cargos -->
+            <div class="mt-6">
+                <div class="mb-6">
+                    <label class="block mb-1 font-medium text-gray-700 ">Nome</label>
+                    <input [(ngModel)]="filtroCoordenador" type="text" class="w-full p-3 bg-gray-200 rounded-lg focus:outline-none">
+                </div>
+                <label class="block mb-2 font-medium text-gray-700">Matéria</label>
+                <div class="flex flex-wrap gap-2">
+                    <button (click)="alternarMateria('portugues')"
+                        [ngClass]="{ 'bg-gray-600 text-white': materiaSelecionados.includes('portugues'), 'bg-gray-100 text-gray-800': !materiaSelecionados.includes('portugues')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Português
+                    </button>
+
+                    <button (click)="alternarMateria('matematica')"
+                        [ngClass]="{ 'bg-blue-600 text-white': materiaSelecionados.includes('matematica'), 'bg-blue-100 text-blue-800': !materiaSelecionados.includes('matematica')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Matemática
+                    </button>
+
+                    <button (click)="alternarMateria('ciencias')"
+                        [ngClass]="{ 'bg-yellow-300 text-white': materiaSelecionados.includes('ciencias'), 'bg-yellow-100 text-yellow-500': !materiaSelecionados.includes('ciencias')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Ciências
+                    </button>
+                    <button (click)="alternarMateria('historia')"
+                        [ngClass]="{ 'bg-yellow-700 text-white': materiaSelecionados.includes('historia'), 'bg-yellow-200 text-yellow-900': !materiaSelecionados.includes('historia')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        História
+                    </button>
+                    <button (click)="alternarMateria('geografia')"
+                        [ngClass]="{ 'bg-green-600 text-white': materiaSelecionados.includes('geografia'), 'bg-green-100 text-green-800': !materiaSelecionados.includes('geografia')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Geografia
+                    </button>
+                    <button (click)="alternarMateria('arte')"
+                        [ngClass]="{ 'bg-pink-600 text-white': materiaSelecionados.includes('arte'), 'bg-pink-100 text-pink-800': !materiaSelecionados.includes('arte')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Arte
+                    </button>
+                    <button (click)="alternarMateria('educacaoFisica')"
+                        [ngClass]="{ 'bg-orange-600 text-white': materiaSelecionados.includes('educacaoFisica'), 'bg-orange-100 text-orange-800': !materiaSelecionados.includes('educacaoFisica')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Educação Física
+                    </button>
+                    <button (click)="alternarMateria('ingles')"
+                        [ngClass]="{ 'bg-purple-600 text-white': materiaSelecionados.includes('ingles'), 'bg-purple-100 text-purple-800': !materiaSelecionados.includes('ingles')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Ingles
+                    </button>
+                    <button (click)="alternarMateria('sociologia')"
+                        [ngClass]="{ 'bg-purple-800 text-white': materiaSelecionados.includes('sociologia'), 'bg-purple-200 text-purple-900': !materiaSelecionados.includes('sociologia')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Sociologia
+                    </button>
+                    <button (click)="alternarMateria('filosofia')"
+                        [ngClass]="{ 'bg-amber-300 text-white': materiaSelecionados.includes('filosofia'), 'bg-amber-100 text-amber-400': !materiaSelecionados.includes('filosofia')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Filosofia
+                    </button>
+                    <button (click)="alternarMateria('biologia')"
+                        [ngClass]="{ 'bg-green-800 text-white': materiaSelecionados.includes('biologia'), 'bg-green-200 text-green-900': !materiaSelecionados.includes('biologia')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Biologia
+                    </button>
+                    <button (click)="alternarMateria('fisica')"
+                        [ngClass]="{ 'bg-blue-800 text-white': materiaSelecionados.includes('fisica'), 'bg-blue-200 text-blue-900': !materiaSelecionados.includes('fisica')}"
+                        class="px-4 py-2 transition rounded-lg">
+                        Física
+                    </button>
+                </div>
+
+
+                <!-- Cargos -->
+                <div class="mt-6">
+                    <label class="block mb-2 font-medium text-gray-700">Ano</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button (click)="alternarAno('sexto')"
+                            [ngClass]="{ 'bg-sky-300 text-white': anoSelecionados.includes('sexto'), 'bg-sky-100 text-sky-500': !anoSelecionados.includes('sexto')}"
+                            class="px-4 py-2 transition rounded-lg">
+                            6º
+                        </button>
+
+                        <button (click)="alternarAno('setimo')"
+                            [ngClass]="{ 'bg-emerald-300 text-white': anoSelecionados.includes('setimo'), 'bg-emerald-100 text-emerald-500': !anoSelecionados.includes('setimo')}"
+                            class="px-4 py-2 transition rounded-lg">
+                            7º
+                        </button>
+
+                        <button (click)="alternarAno('oitavo')"
+                            [ngClass]="{ 'bg-amber-300 text-white': anoSelecionados.includes('oitavo'), 'bg-amber-100 text-amber-500': !anoSelecionados.includes('oitavo')}"
+                            class="px-4 py-2 transition rounded-lg">
+                            8º
+                        </button>
+                        <button (click)="alternarAno('nono')"
+                            [ngClass]="{ 'bg-rose-400 text-white': anoSelecionados.includes('nono'), 'bg-rose-100 text-rose-600': !anoSelecionados.includes('nono')}"
+                            class="px-4 py-2 transition rounded-lg">
+                            9º
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid gap-6">
+                <!-- Botões -->
+                <div class="flex justify-end mt-4 space-x-4">
+                    <button (click)="limparFiltros()" class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">Limpar</button>
+                    <button (click)="mostrarModal = false" class="px-6 py-2 text-white bg-green-600 rounded hover:bg-green-800">Aplicar</button>
+                </div>
+            </div>
+
+            <!-- Botão de fechar (X) -->
+            <button class="absolute text-gray-500 top-4 right-4 hover:text-red-500" (click)="ExibirModalPA(false)">
+                <i class="text-xl fa-solid fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <app-createTeachers *ngIf="mostrarModalCT" (fechar)="ExibirModalCreateTeachers(false)"></app-createTeachers>
+
+    <!-- Cards -->
+    <button (click)="abrirDetalhesTeachers()">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+            <div *ngFor="let professor of professoresFiltrados" class="flex items-center p-8 space-x-6 text-white transition-all shadow-2xl bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-700 rounded-xl hover:scale-105 hover:shadow-xl">
+                <!-- Ícone de perfil -->
+                <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
+                    <i class="text-3xl text-purple-600 fas fa-user-tie"></i> <!-- Ícone de pessoa -->
+                </div>
+
+                <!-- Informações do membro -->
+                <div class="flex flex-col space-y-3 text-left">
+                    <!-- Nome do membro -->
+                    <p class="text-3xl font-semibold text-white">{{ professor.nome }}</p>
+
+                    <div *ngIf="professor.escola1 !== ''" class="flex items-center space-x-2">
+                        <i class="text-2xl text-white fa-solid fa-building-columns"></i>
+                        <p class="text-white text-md">{{ professor.escola1 }}</p>
+                    </div>
+                    <div *ngIf="professor.escola2 !== ''" class="flex items-center space-x-2">
+                        <i class="text-2xl text-white fa-solid fa-building-columns"></i>
+                        <p class="text-white text-md">{{ professor.escola2 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </button>
 </div>
 
-<app-createTeachers *ngIf="modalAberto" (fechar)="fecharModalCreateTeachers()"></app-createTeachers>
 
-<!-- Cards -->
-<button>
-    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-        <div *ngFor="let professor of professoresFiltrados" class="flex items-center p-8 space-x-6 text-white transition-all shadow-2xl bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-700 rounded-xl hover:scale-105 hover:shadow-xl">
-            <!-- Ícone de perfil -->
-            <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
-                <i class="text-3xl text-purple-600 fas fa-user-tie"></i> <!-- Ícone de pessoa -->
-            </div>
-
-            <!-- Informações do membro -->
-            <div class="flex flex-col space-y-3 text-left">
-                <!-- Nome do membro -->
-                <p class="text-3xl font-semibold text-white">{{ professor.nome }}</p>
-
-                <!-- Cargo do membro -->
-                <p class="text-xl text-gray-200">{{ professor.escola1 }}</p>
-
-                <!-- Escola do membro -->
-                <p class="text-xl text-gray-200">{{ professor.escola2 }}</p>
-            </div>
-        </div>
-    </div>
-</button>
+<app-viewDetailsManager *ngIf="detailsSchool && perfil === 'Administrador'"></app-viewDetailsManager>
+<app-viewDetailsCoordination *ngIf="detailsSchool && perfil === 'Coordenador'"></app-viewDetailsCoordination>

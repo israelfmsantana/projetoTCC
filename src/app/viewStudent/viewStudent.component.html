@@ -1,31 +1,102 @@
-<h2 class="mb-10 text-5xl font-extrabold text-center text-white">Alunos</h2>
-            
-                <!-- Barra de pesquisa -->
-                <div class="flex justify-center mb-12">
-                    <input [(ngModel)]="filtroAluno" type="text" placeholder="Pesquise por nome ou escola" 
-                    class="w-full max-w-lg p-4 text-xl text-gray-900 transition-all transform bg-gray-100 rounded-lg shadow-lg ml-96 focus:outline-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 hover:scale-105 focus:ring-4 focus:ring-teal-400">
-                    <button class="px-6 py-4 ml-56 text-xl text-center text-white transition-all rounded-lg w-36 bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110" 
-                        (click)="abrirModalCreateStudent()">Adicionar
-                    </button>
+<div *ngIf="!detailsSchool">
+    <h2 class="mb-10 text-5xl font-extrabold text-center text-white">Alunos</h2>
+
+    <!-- Barra de pesquisa + botão -->
+    <div class="flex items-center justify-center mb-12 ml-96">
+        <input [(ngModel)]="filtroEscolas" type="text" placeholder="Pesquise por nome ou escola"
+        class="w-full max-w-lg p-4 text-xl text-gray-900 transition-all transform bg-gray-100 rounded-lg shadow-lg focus:outline-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 focus:ring-4 focus:ring-teal-400" />
+
+        <button class="px-6 py-4 ml-4 text-xl text-white bg-teal-800 rounded-lg shadow-md hover:bg-teal-700" (click)="ExibirModalPA(true)">
+            Pesquisa Avançada
+        </button>
+
+        <button class="px-6 py-4 ml-32 text-xl text-center text-white transition-all rounded-lg w-36 bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110"
+            (click)="ExibirModalCreateStudent(true)">Adicionar
+        </button>
+    </div>
+
+
+    <!-- Modal de Pesquisa Avançada -->
+    <div *ngIf="mostrarModalPA" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <div class="relative w-full max-w-xl p-8 bg-white shadow-2xl rounded-2xl">
+            <h2 class="mb-6 text-3xl font-bold text-gray-800">Pesquisa Avançada</h2>
+
+            <!-- Cargos -->
+            <div class="mt-6">
+                <div class="mb-6">
+                    <label class="block mb-1 font-medium text-gray-700 ">Nome</label>
+                    <input [(ngModel)]="filtroCoordenador" type="text" class="w-full p-3 bg-gray-200 rounded-lg focus:outline-none">
                 </div>
 
-                <app-createStudent *ngIf="modalAberto" (fechar)="fecharModalCreateStudent()"></app-createStudent>
-            
-                <!-- Cards -->
-                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-                    <div *ngFor="let aluno of alunosFiltrados" class="flex items-center p-8 space-x-6 text-white transition-all shadow-2xl bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-700 rounded-xl hover:scale-105 hover:shadow-xl">
-                        <!-- Ícone de perfil -->
-                        <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
-                            <i class="text-3xl text-blue-600 fas fa-user-graduate"></i> <!-- Ícone de estudante -->
-                        </div>
-            
-                        <!-- Informações do membro -->
-                        <div class="flex flex-col space-y-3">
-                            <!-- Nome do aluno -->
-                            <p class="text-3xl font-semibold text-white">{{ aluno.nome }}</p>
-            
-                            <!-- Escola do aluno -->
-                            <p class="text-xl text-gray-200">{{ aluno.escola }}</p>
-                        </div>
+                <!-- Cargos -->
+                <div class="mt-6">
+                    <label class="block mb-2 font-medium text-gray-700">Ano</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button (click)="alternarAno('sexto')"
+                            [ngClass]="{ 'bg-sky-300 text-white': anoSelecionados.includes('sexto'), 'bg-sky-100 text-sky-500': !anoSelecionados.includes('sexto')}"
+                            class="px-4 py-2 transition rounded-lg">
+                            6º
+                        </button>
+
+                        <button (click)="alternarAno('setimo')"
+                            [ngClass]="{ 'bg-emerald-300 text-white': anoSelecionados.includes('setimo'), 'bg-emerald-100 text-emerald-500': !anoSelecionados.includes('setimo')}"
+                            class="px-4 py-2 transition rounded-lg">
+                            7º
+                        </button>
+
+                        <button (click)="alternarAno('oitavo')"
+                            [ngClass]="{ 'bg-amber-300 text-white': anoSelecionados.includes('oitavo'), 'bg-amber-100 text-amber-500': !anoSelecionados.includes('oitavo')}"
+                            class="px-4 py-2 transition rounded-lg">
+                            8º
+                        </button>
+                        <button (click)="alternarAno('nono')"
+                            [ngClass]="{ 'bg-rose-400 text-white': anoSelecionados.includes('nono'), 'bg-rose-100 text-rose-600': !anoSelecionados.includes('nono')}"
+                            class="px-4 py-2 transition rounded-lg">
+                            9º
+                        </button>
                     </div>
                 </div>
+            </div>
+
+            <div class="grid gap-6">
+                <!-- Botões -->
+                <div class="flex justify-end mt-4 space-x-4">
+                    <button (click)="limparFiltros()" class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">Limpar</button>
+                    <button (click)="mostrarModal = false" class="px-6 py-2 text-white bg-green-600 rounded hover:bg-green-800">Aplicar</button>
+                </div>
+            </div>
+
+            <!-- Botão de fechar (X) -->
+            <button class="absolute text-gray-500 top-4 right-4 hover:text-red-500" (click)="ExibirModalPA(false)">
+                <i class="text-xl fa-solid fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <app-createStudent *ngIf="mostrarModalCS" (fechar)="ExibirModalCreateStudent(false)"></app-createStudent>
+
+    <!-- Cards -->
+    <button (click)="abrirDetalhesStudent()">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+            <div *ngFor="let aluno of alunosFiltrados" class="flex items-center p-8 space-x-6 text-white transition-all shadow-2xl bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-700 rounded-xl hover:scale-105 hover:shadow-xl">
+                <!-- Ícone de perfil -->
+                <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
+                    <i class="text-3xl text-blue-600 fas fa-user-graduate"></i> <!-- Ícone de estudante -->
+                </div>
+
+                <!-- Informações do membro -->
+                <div class="flex flex-col space-y-3">
+                    <!-- Nome do aluno -->
+                    <p class="text-3xl font-semibold text-white">{{ aluno.nome }}</p>
+
+                    <!-- Escola do aluno -->
+                    <p class="text-xl text-gray-200">{{ aluno.escola }}</p>
+                </div>
+            </div>
+        </div>
+    </button>
+</div>
+
+
+<app-viewDetailsCoordination *ngIf="detailsSchool && perfil === 'Coordenador'"></app-viewDetailsCoordination>
+<app-viewHomeTeacher *ngIf="detailsSchool && perfil === 'Professor'"></app-viewHomeTeacher>
