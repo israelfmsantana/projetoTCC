@@ -10,25 +10,9 @@ html {
     will-change: transform;
 }
 
-/* Locomotive Scroll styles */
 [data-scroll-container] {
     overflow: hidden;
 }
-
-
-/* #cursor-shadow {
-  position: fixed;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgb(19, 19, 19);
-  opacity: 0.6;
-  pointer-events: none;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-  filter: blur(10px);
-} */
-
-
 
 
 
@@ -36,36 +20,35 @@ html {
 body {
     transition: background-color 0.3s, color 0.3s;
   }
-  
+
   body.light {
     background-color: rgb(218, 221, 238);
     color: black;
   }
-  
+
   body.dark {
-    /* background-color: rgb(0, 31, 78); */
-    color: white;
+    background-color: rgb(23, 37, 84);
   }
-  
+
 
   header {
     transition: background-color 0.3s, color 0.3s;
   }
-  
+
   body.light header {
     background-color: rgb(0, 32, 79);
     color: white;
   }
-  
+
   body.dark header {
     background-color: black;
     color: white;
   }
-  
+
   header.scrolled {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
+
 
 
 

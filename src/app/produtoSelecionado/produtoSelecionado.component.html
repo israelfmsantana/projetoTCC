@@ -1,0 +1,59 @@
+<div class="bg-blue-950">
+  <div class="flex items-center justify-center pt-10 mb-10 space-x-6">
+    <h2 id="title" class="text-5xl font-extrabold text-center text-white ml-72 mr-52">
+      Produtos Selecionados
+    </h2>
+
+    <button
+      class="w-20 px-6 py-4 text-xl text-center text-white transition-all rounded-lg bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-105 hover:brightness-110"
+      (click)="mostrarModalDropdown()">
+      <i class="text-2xl text-white fa-solid fa-gears"></i>
+    </button>
+  </div>
+
+  <div *ngIf="modalDropdown" class="absolute z-10 mt-4 bg-white rounded-md shadow-lg top-24 right-32 w-80">
+    <button (click)="navigateTo('/produto'); mostrarModalDropdown()"
+      class="flex items-center w-full px-4 py-3 space-x-3 text-lg text-left transition-colors rounded-md hover:bg-gray-200">
+      <i class="text-2xl text-black fa-solid fa-list-ul"></i>
+      <span class="text-black">Exibir produtos</span>
+    </button>
+  </div>
+
+  <div *ngIf="carregado" class="grid grid-cols-1 gap-8 mx-auto mt-14 max-w-7xl ml-80">
+    <div *ngFor="let membro of produtoSalvo"
+      class="flex flex-col p-8 space-y-6 text-white transition-all shadow-2xl cursor-pointer bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 rounded-xl hover:scale-105 hover:shadow-xl">
+
+      <div class="flex items-start space-x-6">
+        <img src="{{ membro.image }}" alt="Produto"
+          class="object-cover rounded-lg shadow-lg min-h-28 max-w-40 max-h-40" />
+
+        <div class="flex flex-col space-y-4">
+          <h2 class="text-5xl font-extrabold text-white">{{ membro.title }}</h2>
+
+          <div class="flex space-x-8">
+            <div>
+              <h3 class="text-3xl font-bold text-white">Categoria</h3>
+              <p class="text-xl text-gray-200">{{ membro.category }}</p>
+            </div>
+            <div class="pl-6 border-l border-white/50">
+              <h3 class="text-3xl font-bold text-white">Avaliação</h3>
+              <p class="text-xl text-gray-200">{{ membro.rating }}</p>
+            </div>
+          </div>
+
+          <p class="mt-2 text-2xl text-white/80">USD ${{ membro.price }}</p>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-white/30">
+        <h3 class="text-3xl font-bold text-white">Descrição</h3>
+        <p class="text-xl text-gray-200">{{ membro.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!carregado" class="flex items-center justify-center h-screen">
+    <div class="w-16 h-16 border-t-4 border-blue-500 rounded-full animate-spin"></div>
+    <span class="ml-4 text-2xl font-extrabold text-white">Carregando...</span>
+  </div>
+</div>
